@@ -1,0 +1,2380 @@
+{
+  "contractName": "Shop",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "users",
+      "outputs": [
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "userType",
+          "type": "uint8"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function",
+      "signature": "0xa87430ba"
+    },
+    {
+      "inputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "constructor",
+      "signature": "constructor"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "userAddress",
+          "type": "address"
+        },
+        {
+          "name": "name",
+          "type": "string"
+        }
+      ],
+      "name": "addAdmin",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function",
+      "signature": "0xd16856ca"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "userAddress",
+          "type": "address"
+        },
+        {
+          "name": "name",
+          "type": "string"
+        }
+      ],
+      "name": "addOwner",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function",
+      "signature": "0x3542758f"
+    }
+  ],
+  "bytecode": "0x608060405234801561001057600080fd5b5060408051908101604052806040805190810160405280600b81526020017f53757065722041646d696e00000000000000000000000000000000000000000081525081526020016001600281111561006457fe5b8152506000803373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060008201518160000190805190602001906100c19291906100f3565b5060208201518160010160006101000a81548160ff021916908360028111156100e657fe5b0217905550905050610198565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f1061013457805160ff1916838001178555610162565b82800160010185558215610162579182015b82811115610161578251825591602001919060010190610146565b5b50905061016f9190610173565b5090565b61019591905b80821115610191576000816000905550600101610179565b5090565b90565b6107b8806101a76000396000f3fe608060405260043610610057576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680633542758f1461005c578063a87430ba14610144578063d16856ca14610223575b600080fd5b34801561006857600080fd5b506101426004803603604081101561007f57600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190803590602001906401000000008111156100bc57600080fd5b8201836020820111156100ce57600080fd5b803590602001918460018302840111640100000000831117156100f057600080fd5b91908080601f016020809104026020016040519081016040528093929190818152602001838380828437600081840152601f19601f82011690508083019250505050505050919291929050505061030b565b005b34801561015057600080fd5b506101936004803603602081101561016757600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190505050610494565b60405180806020018360028111156101a757fe5b60ff168152602001828103825284818151815260200191508051906020019080838360005b838110156101e75780820151818401526020810190506101cc565b50505050905090810190601f1680156102145780820380516001836020036101000a031916815260200191505b50935050505060405180910390f35b34801561022f57600080fd5b506103096004803603604081101561024657600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff1690602001909291908035906020019064010000000081111561028357600080fd5b82018360208201111561029557600080fd5b803590602001918460018302840111640100000000831117156102b757600080fd5b91908080601f016020809104026020016040519081016040528093929190818152602001838380828437600081840152601f19601f82011690508083019250505050505050919291929050505061055d565b005b336001600281111561031957fe5b6000808373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060010160009054906101000a900460ff16600281111561037357fe5b1415156103e8576040517f08c379a00000000000000000000000000000000000000000000000000000000081526004018080602001828103825260158152602001807f55736572206d75737420626520616e2061646d696e000000000000000000000081525060200191505060405180910390fd5b604080519081016040528083815260200160028081111561040557fe5b8152506000808573ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060008201518160000190805190602001906104629291906106e7565b5060208201518160010160006101000a81548160ff0219169083600281111561048757fe5b0217905550905050505050565b6000602052806000526040600020600091509050806000018054600181600116156101000203166002900480601f0160208091040260200160405190810160405280929190818152602001828054600181600116156101000203166002900480156105405780601f1061051557610100808354040283529160200191610540565b820191906000526020600020905b81548152906001019060200180831161052357829003601f168201915b5050505050908060010160009054906101000a900460ff16905082565b336001600281111561056b57fe5b6000808373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060010160009054906101000a900460ff1660028111156105c557fe5b14151561063a576040517f08c379a00000000000000000000000000000000000000000000000000000000081526004018080602001828103825260158152602001807f55736572206d75737420626520616e2061646d696e000000000000000000000081525060200191505060405180910390fd5b60408051908101604052808381526020016001600281111561065857fe5b8152506000808573ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060008201518160000190805190602001906106b59291906106e7565b5060208201518160010160006101000a81548160ff021916908360028111156106da57fe5b0217905550905050505050565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f1061072857805160ff1916838001178555610756565b82800160010185558215610756579182015b8281111561075557825182559160200191906001019061073a565b5b5090506107639190610767565b5090565b61078991905b8082111561078557600081600090555060010161076d565b5090565b9056fea165627a7a72305820ed06e1c69f929ef33d956274100c54af4ea2e9719ea0860b137fa2e775367cb70029",
+  "deployedBytecode": "0x608060405260043610610057576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680633542758f1461005c578063a87430ba14610144578063d16856ca14610223575b600080fd5b34801561006857600080fd5b506101426004803603604081101561007f57600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190803590602001906401000000008111156100bc57600080fd5b8201836020820111156100ce57600080fd5b803590602001918460018302840111640100000000831117156100f057600080fd5b91908080601f016020809104026020016040519081016040528093929190818152602001838380828437600081840152601f19601f82011690508083019250505050505050919291929050505061030b565b005b34801561015057600080fd5b506101936004803603602081101561016757600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190505050610494565b60405180806020018360028111156101a757fe5b60ff168152602001828103825284818151815260200191508051906020019080838360005b838110156101e75780820151818401526020810190506101cc565b50505050905090810190601f1680156102145780820380516001836020036101000a031916815260200191505b50935050505060405180910390f35b34801561022f57600080fd5b506103096004803603604081101561024657600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff1690602001909291908035906020019064010000000081111561028357600080fd5b82018360208201111561029557600080fd5b803590602001918460018302840111640100000000831117156102b757600080fd5b91908080601f016020809104026020016040519081016040528093929190818152602001838380828437600081840152601f19601f82011690508083019250505050505050919291929050505061055d565b005b336001600281111561031957fe5b6000808373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060010160009054906101000a900460ff16600281111561037357fe5b1415156103e8576040517f08c379a00000000000000000000000000000000000000000000000000000000081526004018080602001828103825260158152602001807f55736572206d75737420626520616e2061646d696e000000000000000000000081525060200191505060405180910390fd5b604080519081016040528083815260200160028081111561040557fe5b8152506000808573ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060008201518160000190805190602001906104629291906106e7565b5060208201518160010160006101000a81548160ff0219169083600281111561048757fe5b0217905550905050505050565b6000602052806000526040600020600091509050806000018054600181600116156101000203166002900480601f0160208091040260200160405190810160405280929190818152602001828054600181600116156101000203166002900480156105405780601f1061051557610100808354040283529160200191610540565b820191906000526020600020905b81548152906001019060200180831161052357829003601f168201915b5050505050908060010160009054906101000a900460ff16905082565b336001600281111561056b57fe5b6000808373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060010160009054906101000a900460ff1660028111156105c557fe5b14151561063a576040517f08c379a00000000000000000000000000000000000000000000000000000000081526004018080602001828103825260158152602001807f55736572206d75737420626520616e2061646d696e000000000000000000000081525060200191505060405180910390fd5b60408051908101604052808381526020016001600281111561065857fe5b8152506000808573ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060008201518160000190805190602001906106b59291906106e7565b5060208201518160010160006101000a81548160ff021916908360028111156106da57fe5b0217905550905050505050565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f1061072857805160ff1916838001178555610756565b82800160010185558215610756579182015b8281111561075557825182559160200191906001019061073a565b5b5090506107639190610767565b5090565b61078991905b8082111561078557600081600090555060010161076d565b5090565b9056fea165627a7a72305820ed06e1c69f929ef33d956274100c54af4ea2e9719ea0860b137fa2e775367cb70029",
+  "sourceMap": "25:849:1:-;;;331:161;8:9:-1;5:2;;;30:1;27;20:12;5:2;331:161:1;416:71;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;466:14;416:71;;;;;;;;;;;396:5;:17;402:10;396:17;;;;;;;;;;;;;;;:91;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;25:849;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;:::o;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;:::-;;;;;;;",
+  "deployedSourceMap": "25:849:1:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;686:186;;8:9:-1;5:2;;;30:1;27;20:12;5:2;686:186:1;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;686:186:1;;;;;;;;;;;;;;;;;;;;;21:11:-1;8;5:28;2:2;;;46:1;43;36:12;2:2;686:186:1;;35:9:-1;28:4;12:14;8:25;5:40;2:2;;;58:1;55;48:12;2:2;686:186:1;;;;;;100:9:-1;95:1;81:12;77:20;67:8;63:35;60:50;39:11;25:12;22:29;11:107;8:2;;;131:1;128;121:12;8:2;686:186:1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;30:3:-1;22:6;14;1:33;99:1;93:3;85:6;81:16;74:27;137:4;133:9;126:4;121:3;117:14;113:30;106:37;;169:3;161:6;157:16;147:26;;686:186:1;;;;;;;;;;;;;;;;;;145:38;;8:9:-1;5:2;;;30:1;27;20:12;5:2;145:38:1;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;145:38:1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;23:1:-1;8:100;33:3;30:1;27:10;8:100;;;99:1;94:3;90:11;84:18;80:1;75:3;71:11;64:39;52:2;49:1;45:10;40:15;;8:100;;;12:14;145:38:1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;496:186;;8:9:-1;5:2;;;30:1;27;20:12;5:2;496:186:1;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;496:186:1;;;;;;;;;;;;;;;;;;;;;21:11:-1;8;5:28;2:2;;;46:1;43;36:12;2:2;496:186:1;;35:9:-1;28:4;12:14;8:25;5:40;2:2;;;58:1;55;48:12;2:2;496:186:1;;;;;;100:9:-1;95:1;81:12;77:20;67:8;63:35;60:50;39:11;25:12;22:29;11:107;8:2;;;131:1;128;121:12;8:2;496:186:1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;30:3:-1;22:6;14;1:33;99:1;93:3;85:6;81:16;74:27;137:4;133:9;126:4;121:3;117:14;113:30;106:37;;169:3;161:6;157:16;147:26;;496:186:1;;;;;;;;;;;;;;;;;;686;766:10;275:14;244:45;;;;;;;;:5;:18;250:11;244:18;;;;;;;;;;;;;;;:27;;;;;;;;;;;;:45;;;;;;;;;236:79;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;805:62;;;;;;;;;824:4;805:62;;;;846:14;805:62;;;;;;;;;;;784:5;:18;790:11;784:18;;;;;;;;;;;;;;;:83;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;686:186;;;:::o;145:38::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;496:186::-;576:10;275:14;244:45;;;;;;;;:5;:18;250:11;244:18;;;;;;;;;;;;;;;:27;;;;;;;;;;;;:45;;;;;;;;;236:79;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;615:62;;;;;;;;;634:4;615:62;;;;656:14;615:62;;;;;;;;;;;594:5;:18;600:11;594:18;;;;;;;;;;;;;;;:83;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;496:186;;;:::o;25:849::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;:::o;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o",
+  "source": "pragma solidity ^0.5.0;\n\ncontract Shop {\n  enum UserType { Guest, Admin, Owner }\n\n  struct User {\n    string name;\n    UserType userType;\n  }\n\n  mapping (address => User) public users;\n\n  modifier verifyAdmin(address userAddress) {\n    require(users[userAddress].userType == UserType.Admin, \"User must be an admin\");\n    _;\n  }\n\n  constructor() public {\n    // Add contract owner as an admin\n    users[msg.sender] = User({\n      name: \"Super Admin\",\n      userType: UserType.Admin\n    });\n  }\n\n  function addAdmin(address userAddress, string memory name) public\n  verifyAdmin(msg.sender) {\n    users[userAddress] = User({\n      name: name,\n      userType: UserType.Admin\n    });\n  }\n\n  function addOwner(address userAddress, string memory name) public\n  verifyAdmin(msg.sender) {\n    users[userAddress] = User({\n      name: name,\n      userType: UserType.Owner\n    });\n  }\n}",
+  "sourcePath": "/Users/arsood/Desktop/chain-shop-redux/contracts/Shop.sol",
+  "ast": {
+    "absolutePath": "/Users/arsood/Desktop/chain-shop-redux/contracts/Shop.sol",
+    "exportedSymbols": {
+      "Shop": [
+        148
+      ]
+    },
+    "id": 149,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 58,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:1"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 148,
+        "linearizedBaseContracts": [
+          148
+        ],
+        "name": "Shop",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "canonicalName": "Shop.UserType",
+            "id": 62,
+            "members": [
+              {
+                "id": 59,
+                "name": "Guest",
+                "nodeType": "EnumValue",
+                "src": "59:5:1"
+              },
+              {
+                "id": 60,
+                "name": "Admin",
+                "nodeType": "EnumValue",
+                "src": "66:5:1"
+              },
+              {
+                "id": 61,
+                "name": "Owner",
+                "nodeType": "EnumValue",
+                "src": "73:5:1"
+              }
+            ],
+            "name": "UserType",
+            "nodeType": "EnumDefinition",
+            "src": "43:37:1"
+          },
+          {
+            "canonicalName": "Shop.User",
+            "id": 67,
+            "members": [
+              {
+                "constant": false,
+                "id": 64,
+                "name": "name",
+                "nodeType": "VariableDeclaration",
+                "scope": 67,
+                "src": "102:11:1",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 63,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "102:6:1",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 66,
+                "name": "userType",
+                "nodeType": "VariableDeclaration",
+                "scope": 67,
+                "src": "119:17:1",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_enum$_UserType_$62",
+                  "typeString": "enum Shop.UserType"
+                },
+                "typeName": {
+                  "contractScope": null,
+                  "id": 65,
+                  "name": "UserType",
+                  "nodeType": "UserDefinedTypeName",
+                  "referencedDeclaration": 62,
+                  "src": "119:8:1",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_enum$_UserType_$62",
+                    "typeString": "enum Shop.UserType"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "User",
+            "nodeType": "StructDefinition",
+            "scope": 148,
+            "src": "84:57:1",
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 71,
+            "name": "users",
+            "nodeType": "VariableDeclaration",
+            "scope": 148,
+            "src": "145:38:1",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_address_$_t_struct$_User_$67_storage_$",
+              "typeString": "mapping(address => struct Shop.User)"
+            },
+            "typeName": {
+              "id": 70,
+              "keyType": {
+                "id": 68,
+                "name": "address",
+                "nodeType": "ElementaryTypeName",
+                "src": "154:7:1",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "145:25:1",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_address_$_t_struct$_User_$67_storage_$",
+                "typeString": "mapping(address => struct Shop.User)"
+              },
+              "valueType": {
+                "contractScope": null,
+                "id": 69,
+                "name": "User",
+                "nodeType": "UserDefinedTypeName",
+                "referencedDeclaration": 67,
+                "src": "165:4:1",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_User_$67_storage_ptr",
+                  "typeString": "struct Shop.User"
+                }
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 87,
+              "nodeType": "Block",
+              "src": "230:97:1",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "commonType": {
+                          "typeIdentifier": "t_enum$_UserType_$62",
+                          "typeString": "enum Shop.UserType"
+                        },
+                        "id": 82,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "leftExpression": {
+                          "argumentTypes": null,
+                          "expression": {
+                            "argumentTypes": null,
+                            "baseExpression": {
+                              "argumentTypes": null,
+                              "id": 76,
+                              "name": "users",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 71,
+                              "src": "244:5:1",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_mapping$_t_address_$_t_struct$_User_$67_storage_$",
+                                "typeString": "mapping(address => struct Shop.User storage ref)"
+                              }
+                            },
+                            "id": 78,
+                            "indexExpression": {
+                              "argumentTypes": null,
+                              "id": 77,
+                              "name": "userAddress",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 73,
+                              "src": "250:11:1",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_address",
+                                "typeString": "address"
+                              }
+                            },
+                            "isConstant": false,
+                            "isLValue": true,
+                            "isPure": false,
+                            "lValueRequested": false,
+                            "nodeType": "IndexAccess",
+                            "src": "244:18:1",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_struct$_User_$67_storage",
+                              "typeString": "struct Shop.User storage ref"
+                            }
+                          },
+                          "id": 79,
+                          "isConstant": false,
+                          "isLValue": true,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberName": "userType",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 66,
+                          "src": "244:27:1",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_enum$_UserType_$62",
+                            "typeString": "enum Shop.UserType"
+                          }
+                        },
+                        "nodeType": "BinaryOperation",
+                        "operator": "==",
+                        "rightExpression": {
+                          "argumentTypes": null,
+                          "expression": {
+                            "argumentTypes": null,
+                            "id": 80,
+                            "name": "UserType",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 62,
+                            "src": "275:8:1",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_type$_t_enum$_UserType_$62_$",
+                              "typeString": "type(enum Shop.UserType)"
+                            }
+                          },
+                          "id": 81,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "lValueRequested": false,
+                          "memberName": "Admin",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": null,
+                          "src": "275:14:1",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_enum$_UserType_$62",
+                            "typeString": "enum Shop.UserType"
+                          }
+                        },
+                        "src": "244:45:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "hexValue": "55736572206d75737420626520616e2061646d696e",
+                        "id": 83,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "string",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "291:23:1",
+                        "subdenomination": null,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_stringliteral_3d083eccb0f280e51151e4442d9923c15d89f0f30ca4e3bf0491e290e67d846d",
+                          "typeString": "literal_string \"User must be an admin\""
+                        },
+                        "value": "User must be an admin"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        {
+                          "typeIdentifier": "t_stringliteral_3d083eccb0f280e51151e4442d9923c15d89f0f30ca4e3bf0491e290e67d846d",
+                          "typeString": "literal_string \"User must be an admin\""
+                        }
+                      ],
+                      "id": 75,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        166,
+                        167
+                      ],
+                      "referencedDeclaration": 167,
+                      "src": "236:7:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (bool,string memory) pure"
+                      }
+                    },
+                    "id": 84,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "236:79:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 85,
+                  "nodeType": "ExpressionStatement",
+                  "src": "236:79:1"
+                },
+                {
+                  "id": 86,
+                  "nodeType": "PlaceholderStatement",
+                  "src": "321:1:1"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 88,
+            "name": "verifyAdmin",
+            "nodeType": "ModifierDefinition",
+            "parameters": {
+              "id": 74,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 73,
+                  "name": "userAddress",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 88,
+                  "src": "209:19:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 72,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "209:7:1",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "208:21:1"
+            },
+            "src": "188:139:1",
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 102,
+              "nodeType": "Block",
+              "src": "352:140:1",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 100,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "baseExpression": {
+                        "argumentTypes": null,
+                        "id": 91,
+                        "name": "users",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 71,
+                        "src": "396:5:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_mapping$_t_address_$_t_struct$_User_$67_storage_$",
+                          "typeString": "mapping(address => struct Shop.User storage ref)"
+                        }
+                      },
+                      "id": 94,
+                      "indexExpression": {
+                        "argumentTypes": null,
+                        "expression": {
+                          "argumentTypes": null,
+                          "id": 92,
+                          "name": "msg",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 163,
+                          "src": "402:3:1",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_magic_message",
+                            "typeString": "msg"
+                          }
+                        },
+                        "id": 93,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberName": "sender",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": null,
+                        "src": "402:10:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        }
+                      },
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "nodeType": "IndexAccess",
+                      "src": "396:17:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_User_$67_storage",
+                        "typeString": "struct Shop.User storage ref"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "arguments": [
+                        {
+                          "argumentTypes": null,
+                          "hexValue": "53757065722041646d696e",
+                          "id": 96,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "kind": "string",
+                          "lValueRequested": false,
+                          "nodeType": "Literal",
+                          "src": "435:13:1",
+                          "subdenomination": null,
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_stringliteral_dd461f7a057ddf7203381cfeb18d9a007bd3e9b45fa1efec12b4c520e431169c",
+                            "typeString": "literal_string \"Super Admin\""
+                          },
+                          "value": "Super Admin"
+                        },
+                        {
+                          "argumentTypes": null,
+                          "expression": {
+                            "argumentTypes": null,
+                            "id": 97,
+                            "name": "UserType",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 62,
+                            "src": "466:8:1",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_type$_t_enum$_UserType_$62_$",
+                              "typeString": "type(enum Shop.UserType)"
+                            }
+                          },
+                          "id": 98,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "lValueRequested": false,
+                          "memberName": "Admin",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": null,
+                          "src": "466:14:1",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_enum$_UserType_$62",
+                            "typeString": "enum Shop.UserType"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 95,
+                        "name": "User",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 67,
+                        "src": "416:4:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_struct$_User_$67_storage_ptr_$",
+                          "typeString": "type(struct Shop.User storage pointer)"
+                        }
+                      },
+                      "id": 99,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "structConstructorCall",
+                      "lValueRequested": false,
+                      "names": [
+                        "name",
+                        "userType"
+                      ],
+                      "nodeType": "FunctionCall",
+                      "src": "416:71:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_User_$67_memory",
+                        "typeString": "struct Shop.User memory"
+                      }
+                    },
+                    "src": "396:91:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_User_$67_storage",
+                      "typeString": "struct Shop.User storage ref"
+                    }
+                  },
+                  "id": 101,
+                  "nodeType": "ExpressionStatement",
+                  "src": "396:91:1"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 103,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 89,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "342:2:1"
+            },
+            "returnParameters": {
+              "id": 90,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "352:0:1"
+            },
+            "scope": 148,
+            "src": "331:161:1",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 124,
+              "nodeType": "Block",
+              "src": "588:94:1",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 122,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "baseExpression": {
+                        "argumentTypes": null,
+                        "id": 114,
+                        "name": "users",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 71,
+                        "src": "594:5:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_mapping$_t_address_$_t_struct$_User_$67_storage_$",
+                          "typeString": "mapping(address => struct Shop.User storage ref)"
+                        }
+                      },
+                      "id": 116,
+                      "indexExpression": {
+                        "argumentTypes": null,
+                        "id": 115,
+                        "name": "userAddress",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 105,
+                        "src": "600:11:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "nodeType": "IndexAccess",
+                      "src": "594:18:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_User_$67_storage",
+                        "typeString": "struct Shop.User storage ref"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "arguments": [
+                        {
+                          "argumentTypes": null,
+                          "id": 118,
+                          "name": "name",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 107,
+                          "src": "634:4:1",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_string_memory_ptr",
+                            "typeString": "string memory"
+                          }
+                        },
+                        {
+                          "argumentTypes": null,
+                          "expression": {
+                            "argumentTypes": null,
+                            "id": 119,
+                            "name": "UserType",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 62,
+                            "src": "656:8:1",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_type$_t_enum$_UserType_$62_$",
+                              "typeString": "type(enum Shop.UserType)"
+                            }
+                          },
+                          "id": 120,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "lValueRequested": false,
+                          "memberName": "Admin",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": null,
+                          "src": "656:14:1",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_enum$_UserType_$62",
+                            "typeString": "enum Shop.UserType"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 117,
+                        "name": "User",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 67,
+                        "src": "615:4:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_struct$_User_$67_storage_ptr_$",
+                          "typeString": "type(struct Shop.User storage pointer)"
+                        }
+                      },
+                      "id": 121,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "structConstructorCall",
+                      "lValueRequested": false,
+                      "names": [
+                        "name",
+                        "userType"
+                      ],
+                      "nodeType": "FunctionCall",
+                      "src": "615:62:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_User_$67_memory",
+                        "typeString": "struct Shop.User memory"
+                      }
+                    },
+                    "src": "594:83:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_User_$67_storage",
+                      "typeString": "struct Shop.User storage ref"
+                    }
+                  },
+                  "id": 123,
+                  "nodeType": "ExpressionStatement",
+                  "src": "594:83:1"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 125,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [
+              {
+                "arguments": [
+                  {
+                    "argumentTypes": null,
+                    "expression": {
+                      "argumentTypes": null,
+                      "id": 110,
+                      "name": "msg",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 163,
+                      "src": "576:3:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_magic_message",
+                        "typeString": "msg"
+                      }
+                    },
+                    "id": 111,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberName": "sender",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": null,
+                    "src": "576:10:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address_payable",
+                      "typeString": "address payable"
+                    }
+                  }
+                ],
+                "id": 112,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 109,
+                  "name": "verifyAdmin",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 88,
+                  "src": "564:11:1",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_modifier$_t_address_$",
+                    "typeString": "modifier (address)"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "564:23:1"
+              }
+            ],
+            "name": "addAdmin",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 108,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 105,
+                  "name": "userAddress",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 125,
+                  "src": "514:19:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 104,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "514:7:1",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 107,
+                  "name": "name",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 125,
+                  "src": "535:18:1",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 106,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "535:6:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "513:41:1"
+            },
+            "returnParameters": {
+              "id": 113,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "588:0:1"
+            },
+            "scope": 148,
+            "src": "496:186:1",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 146,
+              "nodeType": "Block",
+              "src": "778:94:1",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 144,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "baseExpression": {
+                        "argumentTypes": null,
+                        "id": 136,
+                        "name": "users",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 71,
+                        "src": "784:5:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_mapping$_t_address_$_t_struct$_User_$67_storage_$",
+                          "typeString": "mapping(address => struct Shop.User storage ref)"
+                        }
+                      },
+                      "id": 138,
+                      "indexExpression": {
+                        "argumentTypes": null,
+                        "id": 137,
+                        "name": "userAddress",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 127,
+                        "src": "790:11:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "nodeType": "IndexAccess",
+                      "src": "784:18:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_User_$67_storage",
+                        "typeString": "struct Shop.User storage ref"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "arguments": [
+                        {
+                          "argumentTypes": null,
+                          "id": 140,
+                          "name": "name",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 129,
+                          "src": "824:4:1",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_string_memory_ptr",
+                            "typeString": "string memory"
+                          }
+                        },
+                        {
+                          "argumentTypes": null,
+                          "expression": {
+                            "argumentTypes": null,
+                            "id": 141,
+                            "name": "UserType",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 62,
+                            "src": "846:8:1",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_type$_t_enum$_UserType_$62_$",
+                              "typeString": "type(enum Shop.UserType)"
+                            }
+                          },
+                          "id": 142,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "lValueRequested": false,
+                          "memberName": "Owner",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": null,
+                          "src": "846:14:1",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_enum$_UserType_$62",
+                            "typeString": "enum Shop.UserType"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 139,
+                        "name": "User",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 67,
+                        "src": "805:4:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_struct$_User_$67_storage_ptr_$",
+                          "typeString": "type(struct Shop.User storage pointer)"
+                        }
+                      },
+                      "id": 143,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "structConstructorCall",
+                      "lValueRequested": false,
+                      "names": [
+                        "name",
+                        "userType"
+                      ],
+                      "nodeType": "FunctionCall",
+                      "src": "805:62:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_User_$67_memory",
+                        "typeString": "struct Shop.User memory"
+                      }
+                    },
+                    "src": "784:83:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_User_$67_storage",
+                      "typeString": "struct Shop.User storage ref"
+                    }
+                  },
+                  "id": 145,
+                  "nodeType": "ExpressionStatement",
+                  "src": "784:83:1"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 147,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [
+              {
+                "arguments": [
+                  {
+                    "argumentTypes": null,
+                    "expression": {
+                      "argumentTypes": null,
+                      "id": 132,
+                      "name": "msg",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 163,
+                      "src": "766:3:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_magic_message",
+                        "typeString": "msg"
+                      }
+                    },
+                    "id": 133,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberName": "sender",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": null,
+                    "src": "766:10:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address_payable",
+                      "typeString": "address payable"
+                    }
+                  }
+                ],
+                "id": 134,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 131,
+                  "name": "verifyAdmin",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 88,
+                  "src": "754:11:1",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_modifier$_t_address_$",
+                    "typeString": "modifier (address)"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "754:23:1"
+              }
+            ],
+            "name": "addOwner",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 130,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 127,
+                  "name": "userAddress",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 147,
+                  "src": "704:19:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 126,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "704:7:1",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 129,
+                  "name": "name",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 147,
+                  "src": "725:18:1",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 128,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "725:6:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "703:41:1"
+            },
+            "returnParameters": {
+              "id": 135,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "778:0:1"
+            },
+            "scope": 148,
+            "src": "686:186:1",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 149,
+        "src": "25:849:1"
+      }
+    ],
+    "src": "0:874:1"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/arsood/Desktop/chain-shop-redux/contracts/Shop.sol",
+    "exportedSymbols": {
+      "Shop": [
+        148
+      ]
+    },
+    "id": 149,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 58,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:1"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 148,
+        "linearizedBaseContracts": [
+          148
+        ],
+        "name": "Shop",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "canonicalName": "Shop.UserType",
+            "id": 62,
+            "members": [
+              {
+                "id": 59,
+                "name": "Guest",
+                "nodeType": "EnumValue",
+                "src": "59:5:1"
+              },
+              {
+                "id": 60,
+                "name": "Admin",
+                "nodeType": "EnumValue",
+                "src": "66:5:1"
+              },
+              {
+                "id": 61,
+                "name": "Owner",
+                "nodeType": "EnumValue",
+                "src": "73:5:1"
+              }
+            ],
+            "name": "UserType",
+            "nodeType": "EnumDefinition",
+            "src": "43:37:1"
+          },
+          {
+            "canonicalName": "Shop.User",
+            "id": 67,
+            "members": [
+              {
+                "constant": false,
+                "id": 64,
+                "name": "name",
+                "nodeType": "VariableDeclaration",
+                "scope": 67,
+                "src": "102:11:1",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 63,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "102:6:1",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 66,
+                "name": "userType",
+                "nodeType": "VariableDeclaration",
+                "scope": 67,
+                "src": "119:17:1",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_enum$_UserType_$62",
+                  "typeString": "enum Shop.UserType"
+                },
+                "typeName": {
+                  "contractScope": null,
+                  "id": 65,
+                  "name": "UserType",
+                  "nodeType": "UserDefinedTypeName",
+                  "referencedDeclaration": 62,
+                  "src": "119:8:1",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_enum$_UserType_$62",
+                    "typeString": "enum Shop.UserType"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "User",
+            "nodeType": "StructDefinition",
+            "scope": 148,
+            "src": "84:57:1",
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 71,
+            "name": "users",
+            "nodeType": "VariableDeclaration",
+            "scope": 148,
+            "src": "145:38:1",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_address_$_t_struct$_User_$67_storage_$",
+              "typeString": "mapping(address => struct Shop.User)"
+            },
+            "typeName": {
+              "id": 70,
+              "keyType": {
+                "id": 68,
+                "name": "address",
+                "nodeType": "ElementaryTypeName",
+                "src": "154:7:1",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "145:25:1",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_address_$_t_struct$_User_$67_storage_$",
+                "typeString": "mapping(address => struct Shop.User)"
+              },
+              "valueType": {
+                "contractScope": null,
+                "id": 69,
+                "name": "User",
+                "nodeType": "UserDefinedTypeName",
+                "referencedDeclaration": 67,
+                "src": "165:4:1",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_User_$67_storage_ptr",
+                  "typeString": "struct Shop.User"
+                }
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 87,
+              "nodeType": "Block",
+              "src": "230:97:1",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "commonType": {
+                          "typeIdentifier": "t_enum$_UserType_$62",
+                          "typeString": "enum Shop.UserType"
+                        },
+                        "id": 82,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "leftExpression": {
+                          "argumentTypes": null,
+                          "expression": {
+                            "argumentTypes": null,
+                            "baseExpression": {
+                              "argumentTypes": null,
+                              "id": 76,
+                              "name": "users",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 71,
+                              "src": "244:5:1",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_mapping$_t_address_$_t_struct$_User_$67_storage_$",
+                                "typeString": "mapping(address => struct Shop.User storage ref)"
+                              }
+                            },
+                            "id": 78,
+                            "indexExpression": {
+                              "argumentTypes": null,
+                              "id": 77,
+                              "name": "userAddress",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 73,
+                              "src": "250:11:1",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_address",
+                                "typeString": "address"
+                              }
+                            },
+                            "isConstant": false,
+                            "isLValue": true,
+                            "isPure": false,
+                            "lValueRequested": false,
+                            "nodeType": "IndexAccess",
+                            "src": "244:18:1",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_struct$_User_$67_storage",
+                              "typeString": "struct Shop.User storage ref"
+                            }
+                          },
+                          "id": 79,
+                          "isConstant": false,
+                          "isLValue": true,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberName": "userType",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 66,
+                          "src": "244:27:1",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_enum$_UserType_$62",
+                            "typeString": "enum Shop.UserType"
+                          }
+                        },
+                        "nodeType": "BinaryOperation",
+                        "operator": "==",
+                        "rightExpression": {
+                          "argumentTypes": null,
+                          "expression": {
+                            "argumentTypes": null,
+                            "id": 80,
+                            "name": "UserType",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 62,
+                            "src": "275:8:1",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_type$_t_enum$_UserType_$62_$",
+                              "typeString": "type(enum Shop.UserType)"
+                            }
+                          },
+                          "id": 81,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "lValueRequested": false,
+                          "memberName": "Admin",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": null,
+                          "src": "275:14:1",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_enum$_UserType_$62",
+                            "typeString": "enum Shop.UserType"
+                          }
+                        },
+                        "src": "244:45:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "hexValue": "55736572206d75737420626520616e2061646d696e",
+                        "id": 83,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "string",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "291:23:1",
+                        "subdenomination": null,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_stringliteral_3d083eccb0f280e51151e4442d9923c15d89f0f30ca4e3bf0491e290e67d846d",
+                          "typeString": "literal_string \"User must be an admin\""
+                        },
+                        "value": "User must be an admin"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        {
+                          "typeIdentifier": "t_stringliteral_3d083eccb0f280e51151e4442d9923c15d89f0f30ca4e3bf0491e290e67d846d",
+                          "typeString": "literal_string \"User must be an admin\""
+                        }
+                      ],
+                      "id": 75,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        166,
+                        167
+                      ],
+                      "referencedDeclaration": 167,
+                      "src": "236:7:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (bool,string memory) pure"
+                      }
+                    },
+                    "id": 84,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "236:79:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 85,
+                  "nodeType": "ExpressionStatement",
+                  "src": "236:79:1"
+                },
+                {
+                  "id": 86,
+                  "nodeType": "PlaceholderStatement",
+                  "src": "321:1:1"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 88,
+            "name": "verifyAdmin",
+            "nodeType": "ModifierDefinition",
+            "parameters": {
+              "id": 74,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 73,
+                  "name": "userAddress",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 88,
+                  "src": "209:19:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 72,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "209:7:1",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "208:21:1"
+            },
+            "src": "188:139:1",
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 102,
+              "nodeType": "Block",
+              "src": "352:140:1",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 100,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "baseExpression": {
+                        "argumentTypes": null,
+                        "id": 91,
+                        "name": "users",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 71,
+                        "src": "396:5:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_mapping$_t_address_$_t_struct$_User_$67_storage_$",
+                          "typeString": "mapping(address => struct Shop.User storage ref)"
+                        }
+                      },
+                      "id": 94,
+                      "indexExpression": {
+                        "argumentTypes": null,
+                        "expression": {
+                          "argumentTypes": null,
+                          "id": 92,
+                          "name": "msg",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 163,
+                          "src": "402:3:1",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_magic_message",
+                            "typeString": "msg"
+                          }
+                        },
+                        "id": 93,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberName": "sender",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": null,
+                        "src": "402:10:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        }
+                      },
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "nodeType": "IndexAccess",
+                      "src": "396:17:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_User_$67_storage",
+                        "typeString": "struct Shop.User storage ref"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "arguments": [
+                        {
+                          "argumentTypes": null,
+                          "hexValue": "53757065722041646d696e",
+                          "id": 96,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "kind": "string",
+                          "lValueRequested": false,
+                          "nodeType": "Literal",
+                          "src": "435:13:1",
+                          "subdenomination": null,
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_stringliteral_dd461f7a057ddf7203381cfeb18d9a007bd3e9b45fa1efec12b4c520e431169c",
+                            "typeString": "literal_string \"Super Admin\""
+                          },
+                          "value": "Super Admin"
+                        },
+                        {
+                          "argumentTypes": null,
+                          "expression": {
+                            "argumentTypes": null,
+                            "id": 97,
+                            "name": "UserType",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 62,
+                            "src": "466:8:1",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_type$_t_enum$_UserType_$62_$",
+                              "typeString": "type(enum Shop.UserType)"
+                            }
+                          },
+                          "id": 98,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "lValueRequested": false,
+                          "memberName": "Admin",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": null,
+                          "src": "466:14:1",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_enum$_UserType_$62",
+                            "typeString": "enum Shop.UserType"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 95,
+                        "name": "User",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 67,
+                        "src": "416:4:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_struct$_User_$67_storage_ptr_$",
+                          "typeString": "type(struct Shop.User storage pointer)"
+                        }
+                      },
+                      "id": 99,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "structConstructorCall",
+                      "lValueRequested": false,
+                      "names": [
+                        "name",
+                        "userType"
+                      ],
+                      "nodeType": "FunctionCall",
+                      "src": "416:71:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_User_$67_memory",
+                        "typeString": "struct Shop.User memory"
+                      }
+                    },
+                    "src": "396:91:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_User_$67_storage",
+                      "typeString": "struct Shop.User storage ref"
+                    }
+                  },
+                  "id": 101,
+                  "nodeType": "ExpressionStatement",
+                  "src": "396:91:1"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 103,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 89,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "342:2:1"
+            },
+            "returnParameters": {
+              "id": 90,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "352:0:1"
+            },
+            "scope": 148,
+            "src": "331:161:1",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 124,
+              "nodeType": "Block",
+              "src": "588:94:1",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 122,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "baseExpression": {
+                        "argumentTypes": null,
+                        "id": 114,
+                        "name": "users",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 71,
+                        "src": "594:5:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_mapping$_t_address_$_t_struct$_User_$67_storage_$",
+                          "typeString": "mapping(address => struct Shop.User storage ref)"
+                        }
+                      },
+                      "id": 116,
+                      "indexExpression": {
+                        "argumentTypes": null,
+                        "id": 115,
+                        "name": "userAddress",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 105,
+                        "src": "600:11:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "nodeType": "IndexAccess",
+                      "src": "594:18:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_User_$67_storage",
+                        "typeString": "struct Shop.User storage ref"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "arguments": [
+                        {
+                          "argumentTypes": null,
+                          "id": 118,
+                          "name": "name",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 107,
+                          "src": "634:4:1",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_string_memory_ptr",
+                            "typeString": "string memory"
+                          }
+                        },
+                        {
+                          "argumentTypes": null,
+                          "expression": {
+                            "argumentTypes": null,
+                            "id": 119,
+                            "name": "UserType",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 62,
+                            "src": "656:8:1",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_type$_t_enum$_UserType_$62_$",
+                              "typeString": "type(enum Shop.UserType)"
+                            }
+                          },
+                          "id": 120,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "lValueRequested": false,
+                          "memberName": "Admin",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": null,
+                          "src": "656:14:1",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_enum$_UserType_$62",
+                            "typeString": "enum Shop.UserType"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 117,
+                        "name": "User",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 67,
+                        "src": "615:4:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_struct$_User_$67_storage_ptr_$",
+                          "typeString": "type(struct Shop.User storage pointer)"
+                        }
+                      },
+                      "id": 121,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "structConstructorCall",
+                      "lValueRequested": false,
+                      "names": [
+                        "name",
+                        "userType"
+                      ],
+                      "nodeType": "FunctionCall",
+                      "src": "615:62:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_User_$67_memory",
+                        "typeString": "struct Shop.User memory"
+                      }
+                    },
+                    "src": "594:83:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_User_$67_storage",
+                      "typeString": "struct Shop.User storage ref"
+                    }
+                  },
+                  "id": 123,
+                  "nodeType": "ExpressionStatement",
+                  "src": "594:83:1"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 125,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [
+              {
+                "arguments": [
+                  {
+                    "argumentTypes": null,
+                    "expression": {
+                      "argumentTypes": null,
+                      "id": 110,
+                      "name": "msg",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 163,
+                      "src": "576:3:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_magic_message",
+                        "typeString": "msg"
+                      }
+                    },
+                    "id": 111,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberName": "sender",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": null,
+                    "src": "576:10:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address_payable",
+                      "typeString": "address payable"
+                    }
+                  }
+                ],
+                "id": 112,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 109,
+                  "name": "verifyAdmin",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 88,
+                  "src": "564:11:1",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_modifier$_t_address_$",
+                    "typeString": "modifier (address)"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "564:23:1"
+              }
+            ],
+            "name": "addAdmin",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 108,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 105,
+                  "name": "userAddress",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 125,
+                  "src": "514:19:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 104,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "514:7:1",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 107,
+                  "name": "name",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 125,
+                  "src": "535:18:1",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 106,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "535:6:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "513:41:1"
+            },
+            "returnParameters": {
+              "id": 113,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "588:0:1"
+            },
+            "scope": 148,
+            "src": "496:186:1",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 146,
+              "nodeType": "Block",
+              "src": "778:94:1",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 144,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "baseExpression": {
+                        "argumentTypes": null,
+                        "id": 136,
+                        "name": "users",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 71,
+                        "src": "784:5:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_mapping$_t_address_$_t_struct$_User_$67_storage_$",
+                          "typeString": "mapping(address => struct Shop.User storage ref)"
+                        }
+                      },
+                      "id": 138,
+                      "indexExpression": {
+                        "argumentTypes": null,
+                        "id": 137,
+                        "name": "userAddress",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 127,
+                        "src": "790:11:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "nodeType": "IndexAccess",
+                      "src": "784:18:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_User_$67_storage",
+                        "typeString": "struct Shop.User storage ref"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "arguments": [
+                        {
+                          "argumentTypes": null,
+                          "id": 140,
+                          "name": "name",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 129,
+                          "src": "824:4:1",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_string_memory_ptr",
+                            "typeString": "string memory"
+                          }
+                        },
+                        {
+                          "argumentTypes": null,
+                          "expression": {
+                            "argumentTypes": null,
+                            "id": 141,
+                            "name": "UserType",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 62,
+                            "src": "846:8:1",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_type$_t_enum$_UserType_$62_$",
+                              "typeString": "type(enum Shop.UserType)"
+                            }
+                          },
+                          "id": 142,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "lValueRequested": false,
+                          "memberName": "Owner",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": null,
+                          "src": "846:14:1",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_enum$_UserType_$62",
+                            "typeString": "enum Shop.UserType"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 139,
+                        "name": "User",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 67,
+                        "src": "805:4:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_struct$_User_$67_storage_ptr_$",
+                          "typeString": "type(struct Shop.User storage pointer)"
+                        }
+                      },
+                      "id": 143,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "structConstructorCall",
+                      "lValueRequested": false,
+                      "names": [
+                        "name",
+                        "userType"
+                      ],
+                      "nodeType": "FunctionCall",
+                      "src": "805:62:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_User_$67_memory",
+                        "typeString": "struct Shop.User memory"
+                      }
+                    },
+                    "src": "784:83:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_User_$67_storage",
+                      "typeString": "struct Shop.User storage ref"
+                    }
+                  },
+                  "id": 145,
+                  "nodeType": "ExpressionStatement",
+                  "src": "784:83:1"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 147,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [
+              {
+                "arguments": [
+                  {
+                    "argumentTypes": null,
+                    "expression": {
+                      "argumentTypes": null,
+                      "id": 132,
+                      "name": "msg",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 163,
+                      "src": "766:3:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_magic_message",
+                        "typeString": "msg"
+                      }
+                    },
+                    "id": 133,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberName": "sender",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": null,
+                    "src": "766:10:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address_payable",
+                      "typeString": "address payable"
+                    }
+                  }
+                ],
+                "id": 134,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 131,
+                  "name": "verifyAdmin",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 88,
+                  "src": "754:11:1",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_modifier$_t_address_$",
+                    "typeString": "modifier (address)"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "754:23:1"
+              }
+            ],
+            "name": "addOwner",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 130,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 127,
+                  "name": "userAddress",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 147,
+                  "src": "704:19:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 126,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "704:7:1",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 129,
+                  "name": "name",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 147,
+                  "src": "725:18:1",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 128,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "725:6:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "703:41:1"
+            },
+            "returnParameters": {
+              "id": 135,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "778:0:1"
+            },
+            "scope": 148,
+            "src": "686:186:1",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 149,
+        "src": "25:849:1"
+      }
+    ],
+    "src": "0:874:1"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.0+commit.1d4f565a.Emscripten.clang"
+  },
+  "networks": {
+    "5777": {
+      "events": {},
+      "links": {},
+      "address": "0x5d0834B79F9F1428a98210466b9a13122519B605",
+      "transactionHash": "0x8046d0fb785b4001f5c20def407263d6b19b3a951217804efe73d9dd259859b8"
+    }
+  },
+  "schemaVersion": "3.0.1",
+  "updatedAt": "2019-01-08T06:26:05.406Z",
+  "devdoc": {
+    "methods": {}
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}
