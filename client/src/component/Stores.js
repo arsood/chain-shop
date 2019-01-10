@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { Container, Row, Col, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+
+import { getAllStores } from "../actions/storeActions";
 
 class Stores extends Component {
   constructor() {
@@ -9,13 +12,19 @@ class Stores extends Component {
     this.state = {
       newStoreName: "",
       newStoreCity: "",
-      stores: [],
       showAddStoreModal: false
     };
 
     this.addStore = this.addStore.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.toggleAddStoreModal = this.toggleAddStoreModal.bind(this);
+  }
+
+  componentDidMount() {
+    this
+    .props
+    .actions
+    .getAllStores(this.props.Contract.deployed);
   }
 
   handleChange(event) {
@@ -58,11 +67,40 @@ class Stores extends Component {
     return (
       <React.Fragment>
         <Container>
-          <h1 className="text-center mt-4">Someone's Stores</h1>
+          <h1 className="text-center mt-4">Stores of {this.props.models.User.user.name}</h1>
 
           <div className="mt-3 text-center">
             <a href="#" onClick={this.toggleAddStoreModal}>Add New Store +</a>
           </div>
+
+          { this.props.models.Store.stores.length ?
+            <Row className="mt-3">
+              { this.props.models.Store.stores.map((store, index) => {
+                return (
+                  <Col sm="4" key={index} className="mt-3">
+                    <div className="card">
+                      <div className="card-body">
+                        <h2 className="text-center">{store.name}</h2>
+
+                        <div className="mt-2 text-center">
+                          {store.city}
+                        </div>
+
+                        <Row className="mt-4">
+                          <Col sm="6">
+                            <a href={`/stores/${index}/products`} className="btn btn-info btn-block">View Products</a>
+                          </Col>
+                          <Col sm="6">
+                            <a href="" className="btn btn-warning btn-block">Edit</a>
+                          </Col>
+                        </Row>
+                      </div>
+                    </div>
+                  </Col>
+                );
+              }) }
+            </Row>
+          : null }
         </Container>
 
         <Modal isOpen={this.state.showAddStoreModal} toggle={this.toggleAddStoreModal}>
@@ -85,8 +123,20 @@ class Stores extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    Contract: state.Contract
+    Contract: state.Contract,
+    models: {
+      User: state.User,
+      Store: state.Store
+    }
   }
 };
 
-export default connect(mapStateToProps, null)(Stores);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    actions: {
+      getAllStores: bindActionCreators(getAllStores, dispatch)
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Stores);

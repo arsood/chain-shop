@@ -67,4 +67,8 @@ contract Shop {
       city: city
     }));
   }
+
+  function getStoresLength() public returns(uint) {
+    return stores.length;
+  }
 }
