@@ -47,6 +47,11 @@ class Stores extends Component {
         newStoreCity: "",
         showAddStoreModal: false
       });
+
+      this
+      .props
+      .actions
+      .getAllStores(this.props.Contract.deployed);
     })
     .catch((err) => {
       console.log(err);

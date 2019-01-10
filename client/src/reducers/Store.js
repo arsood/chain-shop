@@ -6,7 +6,7 @@ const Store = (state = initialState, action) => {
   switch (action.type) {
     case "GET_STORES_SUCCESS": {
       return Object.assign({}, state, {
-        stores: state.stores.concat(action.payload)
+        stores: action.payload
       });
     }
 

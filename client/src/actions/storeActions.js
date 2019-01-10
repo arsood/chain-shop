@@ -5,16 +5,20 @@ export const getAllStores = (deployed) => {
     .getStoresLength()
     .call();
 
+    let stores = [];
+
     for (let i = 0; i < storesLength; i++) {
       let store = await deployed
       .methods
       .stores(i)
       .call();
 
-      dispatch({
-        type: "GET_STORES_SUCCESS",
-        payload: store
-      });
+      stores.push(store);
     }
+
+    dispatch({
+      type: "GET_STORES_SUCCESS",
+      payload: stores
+    });
   }
 }
