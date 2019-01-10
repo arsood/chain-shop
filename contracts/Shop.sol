@@ -8,10 +8,27 @@ contract Shop {
     UserType userType;
   }
 
+  struct Store {
+    address ownerAddress;
+    uint storeNumber;
+    string name;
+    string city;
+  }
+
+  // User state
   mapping (address => User) public users;
+
+  // Store state
+  uint public storeNumber;
+  Store[] public stores;
 
   modifier verifyAdmin(address userAddress) {
     require(users[userAddress].userType == UserType.Admin, "User must be an admin");
+    _;
+  }
+
+  modifier verifyOwner(address ownerAddress) {
+    require(users[ownerAddress].userType == UserType.Owner, "User must be an owner");
     _;
   }
 
@@ -37,5 +54,17 @@ contract Shop {
       name: name,
       userType: UserType.Owner
     });
+  }
+
+  function addStore(string memory name, string memory city) public
+  verifyOwner(msg.sender) {
+    storeNumber = storeNumber + 1;
+
+    stores.push(Store({
+      ownerAddress: msg.sender,
+      storeNumber: storeNumber,
+      name: name,
+      city: city
+    }));
   }
 }
