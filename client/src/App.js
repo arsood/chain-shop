@@ -7,7 +7,7 @@ import ShopContract from "./contracts/Shop.json";
 import getWeb3 from "./utils/getWeb3";
 import createStore from "./config/createStore";
 
-import Admin from "./component/Admin";
+import Home from "./component/Home";
 
 import "./App.css";
 
@@ -66,7 +66,7 @@ class App extends Component {
       <Provider store={store}>
         <Router history={history}>
           <Switch>
-            <Route exact path="/" component={Admin} />
+            <Route exact path="/" component={Home} />
           </Switch>
         </Router>
       </Provider>
