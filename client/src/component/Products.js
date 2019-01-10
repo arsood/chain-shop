@@ -4,6 +4,7 @@ import { bindActionCreators } from "redux";
 import { Container, Row, Col, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 
 import { getAllProducts } from "../actions/productActions";
+import { getOneStore } from "../actions/storeActions";
 
 class Products extends Component {
   constructor() {
@@ -26,6 +27,11 @@ class Products extends Component {
     .props
     .actions
     .getAllProducts(this.props.Contract.deployed, this.props.match.params.storeNumber);
+
+    this
+    .props
+    .actions
+    .getOneStore(this.props.Contract.deployed, this.props.match.params.storeNumber);
   }
 
   toggleAddProductModal(event) {
@@ -69,7 +75,7 @@ class Products extends Component {
   render() {
     return (
       <Container>
-        <h1 className="text-center mt-3">Store Name's Products</h1>
+        <h1 className="text-center mt-3">{this.props.models.Store.store.name}'s Products</h1>
 
         <div className="mt-3 text-center">
           <a href="#" onClick={this.toggleAddProductModal}>Add New Product +</a>
@@ -141,7 +147,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     actions: {
-      getAllProducts: bindActionCreators(getAllProducts, dispatch)
+      getAllProducts: bindActionCreators(getAllProducts, dispatch),
+      getOneStore: bindActionCreators(getOneStore, dispatch)
     }
   }
 }

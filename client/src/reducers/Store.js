@@ -1,5 +1,6 @@
 const initialState = {
-  stores: []
+  stores: [],
+  store: {}
 };
 
 const Store = (state = initialState, action) => {
@@ -7,6 +8,12 @@ const Store = (state = initialState, action) => {
     case "GET_STORES_SUCCESS": {
       return Object.assign({}, state, {
         stores: action.payload
+      });
+    }
+
+    case "GET_ONE_STORE_SUCCESS": {
+      return Object.assign({}, state, {
+        store: action.payload
       });
     }
 
