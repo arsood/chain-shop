@@ -15,12 +15,24 @@ contract Shop {
     string city;
   }
 
+  struct Product {
+    uint productNumber;
+    uint storeNumber;
+    string name;
+    string description;
+    uint price;
+  }
+
   // User state
   mapping (address => User) public users;
 
   // Store state
   uint public storeNumber;
   Store[] public stores;
+
+  // Product state
+  uint public productNumber;
+  Product[] public products;
 
   modifier verifyAdmin(address userAddress) {
     require(users[userAddress].userType == UserType.Admin, "User must be an admin");
@@ -68,7 +80,24 @@ contract Shop {
     }));
   }
 
-  function getStoresLength() public returns(uint) {
+  function addProduct(uint storeNumberGiven, string memory name, string memory description, uint price) public
+  verifyOwner(msg.sender) {
+    productNumber = productNumber + 1;
+
+    products.push(Product({
+      productNumber: productNumber,
+      storeNumber: storeNumberGiven,
+      name: name,
+      description: description,
+      price: price
+    }));
+  }
+
+  function getStoresLength() public view returns(uint) {
     return stores.length;
+  }
+
+  function getProductsLength() public view returns(uint) {
+    return products.length;
   }
 }

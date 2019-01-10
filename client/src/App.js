@@ -8,6 +8,7 @@ import getWeb3 from "./utils/getWeb3";
 import createStore from "./config/createStore";
 
 import Home from "./component/Home";
+import Products from "./component/Products";
 
 import "./App.css";
 
@@ -15,6 +16,14 @@ const history = createBrowserHistory();
 const store = createStore();
 
 class App extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      contractLoaded: false
+    };
+  }
+
   componentDidMount = async () => {
     try {
       // Get network provider and web3 instance.
@@ -52,6 +61,10 @@ class App extends Component {
           userType: parseInt(user.userType)
         }
       });
+
+      this.setState({
+        contractLoaded: true
+      });
     } catch (error) {
       // Catch any errors for any of the above operations.
       alert(
@@ -62,15 +75,22 @@ class App extends Component {
   };
 
   render() {
-    return (
-      <Provider store={store}>
-        <Router history={history}>
-          <Switch>
-            <Route exact path="/" component={Home} />
-          </Switch>
-        </Router>
-      </Provider>
-    );
+    if (this.state.contractLoaded) {
+      return (
+        <Provider store={store}>
+          <Router history={history}>
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route exact path="/stores/:storeNumber/products" component={Products} />
+            </Switch>
+          </Router>
+        </Provider>
+      );
+    } else {
+      return (
+        <div>Loading...</div>
+      );
+    }
   }
 }
 

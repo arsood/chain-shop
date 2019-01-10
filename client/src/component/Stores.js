@@ -93,7 +93,7 @@ class Stores extends Component {
 
                         <Row className="mt-4">
                           <Col sm="6">
-                            <a href={`/stores/${index}/products`} className="btn btn-info btn-block">View Products</a>
+                            <a href={`/stores/${store.storeNumber}/products`} className="btn btn-info btn-block">View Products</a>
                           </Col>
                           <Col sm="6">
                             <a href="" className="btn btn-warning btn-block">Edit</a>
