@@ -16,9 +16,6 @@ contract Shop {
   }
 
   struct Product {
-    address payable ownerAddress;
-    uint productNumber;
-    uint storeNumber;
     string name;
     string description;
     uint price;
@@ -37,8 +34,7 @@ contract Shop {
   Store[] public stores;
 
   // Product state
-  uint public productNumber;
-  Product[] public products;
+  mapping (uint => Product[]) public products;
 
   modifier verifyAdmin(address userAddress) {
     require(users[userAddress].userType == UserType.Admin, "User must be an admin");
@@ -62,7 +58,6 @@ contract Shop {
 
     // Initializing state
     storeNumber = 0;
-    productNumber = 0;
   }
 
   function addAdmin(address userAddress, string memory name) public
@@ -95,12 +90,7 @@ contract Shop {
 
   function addProduct(uint storeNumberGiven, string memory name, string memory description, uint price, uint inventory) public
   verifyOwner(msg.sender) {
-    productNumber = productNumber + 1;
-
-    products.push(Product({
-      ownerAddress: msg.sender,
-      productNumber: productNumber,
-      storeNumber: storeNumberGiven,
+    products[storeNumberGiven].push(Product({
       name: name,
       description: description,
       price: price,
@@ -108,14 +98,8 @@ contract Shop {
     }));
   }
 
-  function buyProduct(uint productNumberSelected) public payable {
-    Product memory product;
-
-    for (uint i = 0; i < products.length; i++) {
-      if (products[i].productNumber == productNumberSelected) {
-        product = products[i];
-      }
-    }
+  function buyProduct(uint storeNumberGiven, uint productIndex) public payable {
+    Product memory product = products[storeNumberGiven][productIndex];
 
     contractOwner.transfer(product.price);
     contractOwnerBalance += product.price;
@@ -126,7 +110,7 @@ contract Shop {
     return stores.length;
   }
 
-  function getProductsLength() public view returns(uint) {
-    return products.length;
+  function getProductsLength(uint storeNumberGiven) public view returns(uint) {
+    return products[storeNumberGiven].length;
   }
 }

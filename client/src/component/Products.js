@@ -74,13 +74,13 @@ class Products extends Component {
     .getAllProducts(this.props.Contract.deployed, this.props.match.params.storeNumber);
   }
 
-  async buyProduct(productNumber) {
+  async buyProduct(productIndex) {
     await this
     .props
     .Contract
     .deployed
     .methods
-    .buyProduct(productNumber)
+    .buyProduct(this.props.match.params.storeNumber, productIndex)
     .send({ from: this.props.Contract.accounts[0] });
   }
 
@@ -123,7 +123,7 @@ class Products extends Component {
                           </Col>
                         :
                           <Col sm="12">
-                            <button onClick={this.buyProduct.bind(this, product.productNumber)} className="btn btn-success btn-block">Buy Now</button>
+                            <button onClick={this.buyProduct.bind(this, index)} className="btn btn-success btn-block">Buy Now</button>
                           </Col>
                         }
                       </Row>

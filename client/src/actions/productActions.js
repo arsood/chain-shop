@@ -2,7 +2,7 @@ export const getAllProducts = (deployed, storeNumber) => {
   return async (dispatch) => {
     const productsLength = await deployed
     .methods
-    .getProductsLength()
+    .getProductsLength(storeNumber)
     .call();
 
     let products = [];
@@ -10,23 +10,17 @@ export const getAllProducts = (deployed, storeNumber) => {
     for (let i = 0; i < productsLength; i++) {
       let product = await deployed
       .methods
-      .products(i)
+      .products(storeNumber, i)
       .call();
+
+      console.log(product);
 
       products.push(product);
     }
 
-    const filteredProducts = products.filter((product) => {
-      if (product.storeNumber === storeNumber) {
-        return true;
-      }
-
-      return false;
-    });
-
     dispatch({
       type: "GET_PRODUCTS_SUCCESS",
-      payload: filteredProducts
+      payload: products
     });
   }
 }
