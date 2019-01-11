@@ -25,6 +25,10 @@ contract Shop {
     uint inventory;
   }
 
+  // Contract owner state
+  address payable public contractOwner;
+  uint public contractOwnerBalance;
+
   // User state
   mapping (address => User) public users;
 
@@ -46,7 +50,10 @@ contract Shop {
     _;
   }
 
-  constructor() public {
+  constructor() public payable {
+    contractOwner = msg.sender;
+    contractOwnerBalance = 0;
+
     // Add contract owner as an admin
     users[msg.sender] = User({
       name: "Super Admin",
@@ -110,7 +117,8 @@ contract Shop {
       }
     }
 
-    product.ownerAddress.transfer(product.price);
+    contractOwner.transfer(product.price);
+    contractOwnerBalance += product.price;
     product.inventory = product.inventory - 1;
   }
 
