@@ -1,4 +1,4 @@
-export const getAllStores = (deployed) => {
+export const getAllStores = (deployed, isStoreOwner, ownerAddress) => {
   return async (dispatch) => {
     const storesLength = await deployed
     .methods
@@ -14,6 +14,12 @@ export const getAllStores = (deployed) => {
       .call();
 
       stores.push(store);
+    }
+
+    if (isStoreOwner) {
+      stores = stores.filter((store) => {
+        return store.ownerAddress === ownerAddress;
+      });
     }
 
     dispatch({

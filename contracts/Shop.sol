@@ -21,6 +21,7 @@ contract Shop {
     string name;
     string description;
     uint price;
+    uint inventory;
   }
 
   // User state
@@ -80,7 +81,7 @@ contract Shop {
     }));
   }
 
-  function addProduct(uint storeNumberGiven, string memory name, string memory description, uint price) public
+  function addProduct(uint storeNumberGiven, string memory name, string memory description, uint price, uint inventory) public
   verifyOwner(msg.sender) {
     productNumber = productNumber + 1;
 
@@ -89,7 +90,8 @@ contract Shop {
       storeNumber: storeNumberGiven,
       name: name,
       description: description,
-      price: price
+      price: price,
+      inventory: inventory
     }));
   }
 

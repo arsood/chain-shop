@@ -24,7 +24,7 @@ class Stores extends Component {
     this
     .props
     .actions
-    .getAllStores(this.props.Contract.deployed);
+    .getAllStores(this.props.Contract.deployed, this.props.models.User.userType === 2, this.props.Contract.accounts[0]);
   }
 
   handleChange(event) {
@@ -72,11 +72,13 @@ class Stores extends Component {
     return (
       <React.Fragment>
         <Container>
-          <h1 className="text-center mt-4">Stores of {this.props.models.User.user.name}</h1>
+          <h1 className="text-center mt-4">{this.props.models.User.userType === 2 ? "Your Stores" : "All Stores"}</h1>
 
-          <div className="mt-3 text-center">
-            <a href="#" onClick={this.toggleAddStoreModal}>Add New Store +</a>
-          </div>
+          { this.props.models.User.userType === 2 ?
+            <div className="mt-3 text-center">
+              <a href="#" onClick={this.toggleAddStoreModal}>Add New Store +</a>
+            </div>
+          : null }
 
           { this.props.models.Store.stores.length ?
             <Row className="mt-3">
@@ -96,7 +98,7 @@ class Stores extends Component {
                             <a href={`/stores/${store.storeNumber}/products`} className="btn btn-info btn-block">View Products</a>
                           </Col>
                           <Col sm="6">
-                            <a href="" className="btn btn-warning btn-block">Edit</a>
+                            <a href="" className="btn btn-danger btn-block">Delete</a>
                           </Col>
                         </Row>
                       </div>

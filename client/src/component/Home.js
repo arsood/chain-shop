@@ -6,7 +6,11 @@ import Stores from "./Stores";
 
 class Home extends Component {
   render() {
-    if (this.props.models.User.userType === 1) {
+    if (this.props.models.User.userType === 0) {
+      return (
+        <Stores />
+      );
+    } else if (this.props.models.User.userType === 1) {
       return (
         <Admin />
       );

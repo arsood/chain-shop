@@ -14,7 +14,8 @@ class Products extends Component {
       showAddProductModal: false,
       newProductName: "",
       newProductDescription: "",
-      newProductPrice: 0
+      newProductPrice: 0,
+      newProductInventory: 0
     };
 
     this.toggleAddProductModal = this.toggleAddProductModal.bind(this);
@@ -56,13 +57,14 @@ class Products extends Component {
     .Contract
     .deployed
     .methods
-    .addProduct(this.props.match.params.storeNumber, this.state.newProductName, this.state.newProductDescription, this.state.newProductPrice)
+    .addProduct(this.props.match.params.storeNumber, this.state.newProductName, this.state.newProductDescription, this.state.newProductPrice, this.state.newProductInventory)
     .send({ from: this.props.Contract.accounts[0] });
 
     this.setState({
       newProductName: "",
       newProductDescription: "",
       newProductPrice: 0,
+      newProductInventory: 0,
       showAddProductModal: false
     });
 
@@ -72,14 +74,20 @@ class Products extends Component {
     .getAllProducts(this.props.Contract.deployed, this.props.match.params.storeNumber);
   }
 
+  buyProduct(productNumber) {
+    console.log(productNumber);
+  }
+
   render() {
     return (
       <Container>
         <h1 className="text-center mt-3">{this.props.models.Store.store.name}'s Products</h1>
 
-        <div className="mt-3 text-center">
-          <a href="#" onClick={this.toggleAddProductModal}>Add New Product +</a>
-        </div>
+        { this.props.models.User.userType === 2 ?
+          <div className="mt-3 text-center">
+            <a href="#" onClick={this.toggleAddProductModal}>Add New Product +</a>
+          </div>
+        : null }
 
         { this.props.models.Product.products.length ?
           <Row className="mt-3">
@@ -98,13 +106,20 @@ class Products extends Component {
                         ${parseInt(product.price)}
                       </div>
 
+                      <div className="mt-2 text-center">
+                        Number Available: {product.inventory}
+                      </div>
+
                       <Row className="mt-4">
-                        <Col sm="6">
-                          <a href={`/stores/${index}/products`} className="btn btn-info btn-block">View Products</a>
-                        </Col>
-                        <Col sm="6">
-                          <a href="" className="btn btn-warning btn-block">Edit</a>
-                        </Col>
+                        { this.props.models.User.userType === 2 ?
+                          <Col sm="12">
+                            <a href="" className="btn btn-danger btn-block">Delete</a>
+                          </Col>
+                        :
+                          <Col sm="12">
+                            <button onClick={this.buyProduct.bind(this, product.productNumber)} className="btn btn-success btn-block">Buy Now</button>
+                          </Col>
+                        }
                       </Row>
                     </div>
                   </div>
@@ -123,6 +138,8 @@ class Products extends Component {
             <input onChange={this.handleChange} name="newProductDescription" type="text" className="form-control mt-3" placeholder="Enter description of new product" />
 
             <input onChange={this.handleChange} name="newProductPrice" type="number" className="form-control mt-3" placeholder="Enter price of new product" />
+
+            <input onChange={this.handleChange} name="newProductInventory" type="number" className="form-control mt-3" placeholder="Enter inventory of new product" />
           </ModalBody>
 
           <ModalFooter>
@@ -139,7 +156,8 @@ const mapStateToProps = (state) => {
     Contract: state.Contract,
     models: {
       Store: state.Store,
-      Product: state.Product
+      Product: state.Product,
+      User: state.User
     }
   }
 };
