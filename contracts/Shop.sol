@@ -16,6 +16,7 @@ contract Shop {
   }
 
   struct Product {
+    address payable ownerAddress;
     uint productNumber;
     uint storeNumber;
     string name;
@@ -86,6 +87,7 @@ contract Shop {
     productNumber = productNumber + 1;
 
     products.push(Product({
+      ownerAddress: msg.sender,
       productNumber: productNumber,
       storeNumber: storeNumberGiven,
       name: name,
@@ -93,6 +95,19 @@ contract Shop {
       price: price,
       inventory: inventory
     }));
+  }
+
+  function buyProduct(uint productNumberSelected) public payable {
+    Product memory product;
+
+    for (uint i = 0; i < products.length; i++) {
+      if (products[i].productNumber == productNumberSelected) {
+        product = products[i];
+      }
+    }
+
+    product.ownerAddress.transfer(product.price);
+    product.inventory = product.inventory - 1;
   }
 
   function getStoresLength() public view returns(uint) {

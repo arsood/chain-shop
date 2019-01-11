@@ -74,8 +74,14 @@ class Products extends Component {
     .getAllProducts(this.props.Contract.deployed, this.props.match.params.storeNumber);
   }
 
-  buyProduct(productNumber) {
-    console.log(productNumber);
+  async buyProduct(productNumber) {
+    await this
+    .props
+    .Contract
+    .deployed
+    .methods
+    .buyProduct(productNumber)
+    .send({ from: this.props.Contract.accounts[0] });
   }
 
   render() {
