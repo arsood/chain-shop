@@ -13,8 +13,6 @@ export const getAllProducts = (deployed, storeNumber) => {
       .products(storeNumber, i)
       .call();
 
-      console.log(product);
-
       products.push(product);
     }
 
