@@ -52,6 +52,10 @@ contract Shop {
       name: "Super Admin",
       userType: UserType.Admin
     });
+
+    // Initializing state
+    storeNumber = 0;
+    productNumber = 0;
   }
 
   function addAdmin(address userAddress, string memory name) public
