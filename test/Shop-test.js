@@ -22,4 +22,28 @@ contract("Shop", accounts => {
 
     expect(parseInt(newOwner.userType)).to.equal(2);
   });
+
+  it("Should add a store for an owner type", async () => {
+    const shopInstance = await Shop.deployed();
+
+    await shopInstance
+    .addStore("Test Store", "San Francisco, CA", { from: accounts[2] });
+
+    const store = await shopInstance.stores(0);
+
+    expect(parseInt(store.storeNumber)).to.equal(1);
+    expect(store.ownerAddress).to.equal(accounts[2]);
+  });
+
+  it("Should add a product for a specific store", async () => {
+    const shopInstance = await Shop.deployed();
+
+    await shopInstance
+    .addProduct(1, "Sandwich", "It is good", 5, 10, { from: accounts[2] });
+
+    const product = await shopInstance.products(1, 0);
+
+    expect(product.name).to.equal("Sandwich");
+    expect(parseInt(product.price)).to.equal(5);
+  });
 });
