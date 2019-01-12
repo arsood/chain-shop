@@ -5,6 +5,8 @@ import { bindActionCreators } from "redux";
 
 import { getAllStores } from "../actions/storeActions";
 
+import CurrentState from "./CurrentState";
+
 class Stores extends Component {
   constructor() {
     super();
@@ -72,6 +74,8 @@ class Stores extends Component {
     return (
       <React.Fragment>
         <Container>
+          <CurrentState />
+
           <h1 className="text-center mt-4">{this.props.models.User.userType === 2 ? "Your Stores" : "All Stores"}</h1>
 
           { this.props.models.User.userType === 2 ?

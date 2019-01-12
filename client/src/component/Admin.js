@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Container } from "reactstrap";
 import { connect } from "react-redux";
 
+import CurrentState from "./CurrentState";
+
 class Admin extends Component {
   constructor() {
     super();
@@ -48,6 +50,8 @@ class Admin extends Component {
   render() {
     return (
       <Container>
+        <CurrentState />
+
         <h1 className="text-center mt-4">Add Admin</h1>
 
         <input onChange={this.handleChange} name="newAdminAddress" type="text" className="form-control mt-3" placeholder="Enter address of new admin" />

@@ -6,6 +6,8 @@ import { Container, Row, Col, Modal, ModalHeader, ModalBody, ModalFooter } from 
 import { getAllProducts } from "../actions/productActions";
 import { getOneStore } from "../actions/storeActions";
 
+import CurrentState from "./CurrentState";
+
 class Products extends Component {
   constructor() {
     super();
@@ -87,6 +89,8 @@ class Products extends Component {
   render() {
     return (
       <Container>
+        <CurrentState />
+
         <h1 className="text-center mt-3">{this.props.models.Store.store.name}'s Products</h1>
 
         { this.props.models.User.userType === 2 ?
