@@ -46,7 +46,7 @@ contract Shop {
     _;
   }
 
-  constructor() public payable {
+  constructor() public {
     contractOwner = msg.sender;
     contractOwnerBalance = 0;
 
