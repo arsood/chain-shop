@@ -101,8 +101,10 @@ contract Shop {
   function buyProduct(uint storeNumberGiven, uint productIndex) public payable {
     Product memory product = products[storeNumberGiven][productIndex];
 
-    contractOwner.transfer(product.price);
-    contractOwnerBalance += product.price;
+    require(product.price == msg.value, "Product price and value sent must be equal");
+
+    contractOwner.transfer(msg.value);
+    contractOwnerBalance += msg.value;
     product.inventory = product.inventory - 1;
   }
 

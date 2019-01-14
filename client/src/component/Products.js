@@ -59,7 +59,7 @@ class Products extends Component {
     .Contract
     .deployed
     .methods
-    .addProduct(this.props.match.params.storeNumber, this.state.newProductName, this.state.newProductDescription, this.state.newProductPrice, this.state.newProductInventory)
+    .addProduct(this.props.match.params.storeNumber, this.state.newProductName, this.state.newProductDescription, this.props.Contract.web3.utils.toWei(this.state.newProductPrice, "ether"), this.state.newProductInventory)
     .send({ from: this.props.Contract.accounts[0] });
 
     this.setState({
@@ -83,7 +83,7 @@ class Products extends Component {
     .deployed
     .methods
     .buyProduct(this.props.match.params.storeNumber, productIndex)
-    .send({ from: this.props.Contract.accounts[0], value: this.props.Contract.web3.utils.toWei(productPrice, "ether") });
+    .send({ from: this.props.Contract.accounts[0], value: productPrice });
   }
 
   render() {
@@ -113,7 +113,7 @@ class Products extends Component {
                       </div>
 
                       <div className="mt-2 text-center">
-                        ${parseInt(product.price)}
+                        {parseInt(this.props.Contract.web3.utils.fromWei(product.price, "ether"))} Ether
                       </div>
 
                       <div className="mt-2 text-center">
@@ -147,7 +147,7 @@ class Products extends Component {
 
             <input onChange={this.handleChange} name="newProductDescription" type="text" className="form-control mt-3" placeholder="Enter description of new product" />
 
-            <input onChange={this.handleChange} name="newProductPrice" type="number" className="form-control mt-3" placeholder="Enter price of new product" />
+            <input onChange={this.handleChange} name="newProductPrice" type="number" className="form-control mt-3" placeholder="Enter price of new product in Ether" />
 
             <input onChange={this.handleChange} name="newProductInventory" type="number" className="form-control mt-3" placeholder="Enter inventory of new product" />
           </ModalBody>
