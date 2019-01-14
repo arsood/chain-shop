@@ -46,4 +46,15 @@ contract("Shop", accounts => {
     expect(product.name).to.equal("Sandwich");
     expect(parseInt(product.price)).to.equal(5);
   });
+
+  it("Should buy a product for a specific store", async () => {
+    const shopInstance = await Shop.deployed();
+
+    await shopInstance
+    .buyProduct(1, 1, { from: accounts[3], value: "5" });
+
+    const product = await shopInstance.products(1, 0);
+
+    expect(parseInt(product.inventory)).to.equal(9);
+  });
 });
