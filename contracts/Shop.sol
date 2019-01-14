@@ -110,7 +110,7 @@ contract Shop {
       if (products[storeNumberGiven][i].productNumber == productNumberGiven) {
         product = products[storeNumberGiven][i];
 
-        require(product.inventory >= 1);
+        require(product.inventory >= 1, "Store must have inventory of this product");
 
         products[storeNumberGiven][i].inventory = products[storeNumberGiven][i].inventory - 1;
       }
