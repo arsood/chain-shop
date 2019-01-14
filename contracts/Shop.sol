@@ -13,9 +13,11 @@ contract Shop {
     uint storeNumber;
     string name;
     string city;
+    uint earnings;
   }
 
   struct Product {
+    uint productNumber;
     string name;
     string description;
     uint price;
@@ -34,6 +36,7 @@ contract Shop {
   Store[] public stores;
 
   // Product state
+  uint public productNumber;
   mapping (uint => Product[]) public products;
 
   modifier verifyAdmin(address userAddress) {
@@ -51,6 +54,7 @@ contract Shop {
     contractOwner = msg.sender;
     contractOwnerBalance = 0;
     storeNumber = 0;
+    productNumber = 0;
 
     // Add contract owner as an admin
     users[msg.sender] = User({
@@ -83,13 +87,17 @@ contract Shop {
       ownerAddress: msg.sender,
       storeNumber: storeNumber,
       name: name,
-      city: city
+      city: city,
+      earnings: 0
     }));
   }
 
   function addProduct(uint storeNumberGiven, string memory name, string memory description, uint price, uint inventory) public
   verifyOwner(msg.sender) {
+    productNumber = productNumber + 1;
+
     products[storeNumberGiven].push(Product({
+      productNumber: productNumber,
       name: name,
       description: description,
       price: price,
@@ -97,14 +105,27 @@ contract Shop {
     }));
   }
 
-  function buyProduct(uint storeNumberGiven, uint productIndex) public payable {
-    Product memory product = products[storeNumberGiven][productIndex];
+  function buyProduct(uint storeNumberGiven, uint productNumberGiven) public payable {
+    Product memory product;
+
+    for (uint i = 0; i < products[storeNumberGiven].length; i++) {
+      if (products[storeNumberGiven][i].productNumber == productNumberGiven) {
+        product = products[storeNumberGiven][i];
+      }
+    }
 
     require(product.price == msg.value, "Product price and value sent must be equal");
 
+    product.inventory = product.inventory - 1;
+
     contractOwner.transfer(product.price);
     contractOwnerBalance += product.price;
-    product.inventory = product.inventory - 1;
+
+    for (uint i = 0; i < stores.length; i++) {
+      if (stores[i].storeNumber == storeNumberGiven) {
+        stores[i].earnings += product.price;
+      }
+    }
   }
 
   function getStoresLength() public view returns(uint) {
