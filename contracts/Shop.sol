@@ -47,17 +47,16 @@ contract Shop {
   }
 
   constructor() public {
+    // Initializing state
     contractOwner = msg.sender;
     contractOwnerBalance = 0;
+    storeNumber = 0;
 
     // Add contract owner as an admin
     users[msg.sender] = User({
       name: "Super Admin",
       userType: UserType.Admin
     });
-
-    // Initializing state
-    storeNumber = 0;
   }
 
   function addAdmin(address userAddress, string memory name) public
