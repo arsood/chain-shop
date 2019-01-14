@@ -103,8 +103,8 @@ contract Shop {
 
     require(product.price == msg.value, "Product price and value sent must be equal");
 
-    contractOwner.transfer(msg.value);
-    contractOwnerBalance += msg.value;
+    contractOwner.transfer(product.price);
+    contractOwnerBalance += product.price;
     product.inventory = product.inventory - 1;
   }
 
