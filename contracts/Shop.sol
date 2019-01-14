@@ -25,8 +25,7 @@ contract Shop {
   }
 
   // Contract owner state
-  address payable public contractOwner;
-  uint public contractOwnerBalance;
+  uint private contractBalance;
 
   // User state
   mapping (address => User) public users;
@@ -51,8 +50,7 @@ contract Shop {
 
   constructor() public {
     // Initializing state
-    contractOwner = msg.sender;
-    contractOwnerBalance = 0;
+    contractBalance = 0;
     storeNumber = 0;
     productNumber = 0;
 
@@ -111,19 +109,31 @@ contract Shop {
     for (uint i = 0; i < products[storeNumberGiven].length; i++) {
       if (products[storeNumberGiven][i].productNumber == productNumberGiven) {
         product = products[storeNumberGiven][i];
+
+        require(product.inventory >= 1);
+
+        products[storeNumberGiven][i].inventory = products[storeNumberGiven][i].inventory - 1;
       }
     }
 
     require(product.price == msg.value, "Product price and value sent must be equal");
 
-    product.inventory = product.inventory - 1;
-
-    contractOwner.transfer(product.price);
-    contractOwnerBalance += product.price;
+    contractBalance += product.price;
 
     for (uint i = 0; i < stores.length; i++) {
       if (stores[i].storeNumber == storeNumberGiven) {
         stores[i].earnings += product.price;
+      }
+    }
+  }
+
+  function withdrawEarnings(uint storeNumberGiven) public {
+    for (uint i = 0; i < stores.length; i++) {
+      if (stores[i].storeNumber == storeNumberGiven) {
+        require(contractBalance >= stores[i].earnings, "Contract must have enough balance to process this withdrawal");
+
+        msg.sender.transfer(stores[i].earnings);
+        stores[i].earnings = 0;
       }
     }
   }

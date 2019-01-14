@@ -69,6 +69,31 @@ class Stores extends Component {
       showAddStoreModal: this.state.showAddStoreModal ? false : true
     });
   }
+
+  async withdrawEarnings(storeNumber, earnings) {
+    if (earnings === "0") {
+      return alert("There are no funds to withdraw");
+    }
+
+    const withdrawConfirm = window.confirm(`Would you like to withdraw ${this.props.Contract.web3.utils.fromWei(earnings, "ether")} Ether to your account?`);
+
+    if (!withdrawConfirm) {
+      return false;
+    }
+
+    await this
+    .props
+    .Contract
+    .deployed
+    .methods
+    .withdrawEarnings(storeNumber)
+    .send({ from: this.props.Contract.accounts[0] });
+
+    this
+    .props
+    .actions
+    .getAllStores(this.props.Contract.deployed, this.props.models.User.userType === 2, this.props.Contract.accounts[0]);
+  }
   
   render() {
     return (
@@ -107,6 +132,12 @@ class Stores extends Component {
                           </Col>
                           <Col sm="6">
                             <a href="" className="btn btn-danger btn-block">Delete</a>
+                          </Col>
+                        </Row>
+
+                        <Row className="mt-4">
+                          <Col sm="12">
+                            <button onClick={this.withdrawEarnings.bind(this, store.storeNumber, store.earnings)} className="btn btn-secondary btn-block">Withdraw Earnings</button>
                           </Col>
                         </Row>
                       </div>

@@ -84,6 +84,11 @@ class Products extends Component {
     .methods
     .buyProduct(this.props.match.params.storeNumber, productNumber)
     .send({ from: this.props.Contract.accounts[0], value: productPrice });
+
+    this
+    .props
+    .actions
+    .getAllProducts(this.props.Contract.deployed, this.props.match.params.storeNumber);
   }
 
   render() {
