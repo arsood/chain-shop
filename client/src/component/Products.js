@@ -76,14 +76,14 @@ class Products extends Component {
     .getAllProducts(this.props.Contract.deployed, this.props.match.params.storeNumber);
   }
 
-  async buyProduct(productIndex) {
+  async buyProduct(productIndex, productPrice) {
     await this
     .props
     .Contract
     .deployed
     .methods
     .buyProduct(this.props.match.params.storeNumber, productIndex)
-    .send({ from: this.props.Contract.accounts[0] });
+    .send({ from: this.props.Contract.accounts[0], value: this.props.Contract.web3.utils.toWei(productPrice, "ether") });
   }
 
   render() {
@@ -127,7 +127,7 @@ class Products extends Component {
                           </Col>
                         :
                           <Col sm="12">
-                            <button onClick={this.buyProduct.bind(this, index)} className="btn btn-success btn-block">Buy Now</button>
+                            <button onClick={this.buyProduct.bind(this, index, product.price)} className="btn btn-success btn-block">Buy Now</button>
                           </Col>
                         }
                       </Row>
