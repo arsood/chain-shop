@@ -1,5 +1,3 @@
-import { bindActionCreators } from "../../../../../../Library/Caches/typescript/3.2/node_modules/redux";
-
 export const getAllStores = (deployed, isStoreOwner, ownerAddress) => {
   return async (dispatch) => {
     const storesLength = await deployed
