@@ -1,6 +1,10 @@
 pragma solidity ^0.5.0;
 
+import "../libraries/SafeMath.sol";
+
 contract Shop {
+  using SafeMath for uint256;
+
   enum UserType { Guest, Admin, Owner }
   enum State { Active, Deleted }
 
@@ -11,37 +15,37 @@ contract Shop {
 
   struct Store {
     address ownerAddress;
-    uint storeNumber;
+    uint256 storeNumber;
     string name;
     string city;
-    uint earnings;
+    uint256 earnings;
     State state;
   }
 
   struct Product {
-    uint productNumber;
+    uint256 productNumber;
     string name;
     string description;
-    uint price;
-    uint inventory;
+    uint256 price;
+    uint256 inventory;
     State state;
   }
 
   // Contract owner state
   address public contractOwner;
-  uint private contractBalance;
+  uint256 private contractBalance;
   bool public emergencyStop;
 
   // User state
   mapping (address => User) public users;
 
   // Store state
-  uint public storeNumber;
+  uint256 public storeNumber;
   Store[] public stores;
 
   // Product state
-  uint public productNumber;
-  mapping (uint => Product[]) public products;
+  uint256 public productNumber;
+  mapping (uint256 => Product[]) public products;
 
   modifier verifyAdmin(address userAddress) {
     require(users[userAddress].userType == UserType.Admin, "User must be an admin");
@@ -138,10 +142,10 @@ contract Shop {
   @dev Deletes a store by its number assigned upon creation
   @param storeNumberGiven Store number provided
   */
-  function deleteStore(uint storeNumberGiven) public
+  function deleteStore(uint256 storeNumberGiven) public
   ensureNoEmergency()
   verifyOwner(msg.sender) {
-    for (uint i = 0; i < stores.length; i++) {
+    for (uint256 i = 0; i < stores.length; i++) {
       if (stores[i].storeNumber == storeNumberGiven) {
         delete stores[i];
 
@@ -149,7 +153,7 @@ contract Shop {
       }
     }
 
-    for (uint i = 0; i < products[storeNumberGiven].length; i++) {
+    for (uint256 i = 0; i < products[storeNumberGiven].length; i++) {
       delete products[storeNumberGiven][i];
 
       products[storeNumberGiven][i].state = State.Deleted;
@@ -162,10 +166,10 @@ contract Shop {
   @param name Name of the store to edit
   @param city City of the store to edit
   */
-  function saveStoreEdits(uint storeNumberGiven, string memory name, string memory city) public
+  function saveStoreEdits(uint256 storeNumberGiven, string memory name, string memory city) public
   ensureNoEmergency()
   verifyOwner(msg.sender) {
-    for (uint i = 0; i < stores.length; i++) {
+    for (uint256 i = 0; i < stores.length; i++) {
       if (stores[i].storeNumber == storeNumberGiven) {
         stores[i].name = name;
         stores[i].city = city;
@@ -181,7 +185,7 @@ contract Shop {
   @param price Price of the new product in Wei
   @param inventory Inventory number of the product
   */
-  function addProduct(uint storeNumberGiven, string memory name, string memory description, uint price, uint inventory) public
+  function addProduct(uint256 storeNumberGiven, string memory name, string memory description, uint256 price, uint256 inventory) public
   ensureNoEmergency()
   verifyOwner(msg.sender) {
     productNumber = productNumber + 1;
@@ -201,10 +205,10 @@ contract Shop {
   @param storeNumberGiven Number of store that the product is tied to
   @param productNumberGiven Product number assigned during creation
   */
-  function deleteProduct(uint storeNumberGiven, uint productNumberGiven) public
+  function deleteProduct(uint256 storeNumberGiven, uint256 productNumberGiven) public
   ensureNoEmergency()
   verifyOwner(msg.sender) {
-    for (uint i = 0; i < products[storeNumberGiven].length; i++) {
+    for (uint256 i = 0; i < products[storeNumberGiven].length; i++) {
       if (products[storeNumberGiven][i].productNumber == productNumberGiven) {
         delete products[storeNumberGiven][i];
 
@@ -222,10 +226,10 @@ contract Shop {
   @param price Edited price of the product
   @param inventory Edited inventory of product
   */
-  function saveProductEdits(uint storeNumberGiven, uint productNumberGiven, string memory name, string memory description, uint price, uint inventory) public
+  function saveProductEdits(uint256 storeNumberGiven, uint256 productNumberGiven, string memory name, string memory description, uint256 price, uint256 inventory) public
   ensureNoEmergency()
   verifyOwner(msg.sender) {
-    for (uint i = 0; i < products[storeNumberGiven].length; i++) {
+    for (uint256 i = 0; i < products[storeNumberGiven].length; i++) {
       if (products[storeNumberGiven][i].productNumber == productNumberGiven) {
         products[storeNumberGiven][i].name = name;
         products[storeNumberGiven][i].description = description;
@@ -240,27 +244,27 @@ contract Shop {
   @param storeNumberGiven Store number that product is associated with
   @param productNumberGiven Specific number of product to be purchased
   */
-  function buyProduct(uint storeNumberGiven, uint productNumberGiven) public payable
+  function buyProduct(uint256 storeNumberGiven, uint256 productNumberGiven) public payable
   ensureNoEmergency() {
     Product memory product;
 
-    for (uint i = 0; i < products[storeNumberGiven].length; i++) {
+    for (uint256 i = 0; i < products[storeNumberGiven].length; i++) {
       if (products[storeNumberGiven][i].productNumber == productNumberGiven) {
         product = products[storeNumberGiven][i];
 
         require(product.inventory >= 1, "Store must have inventory of this product");
 
-        products[storeNumberGiven][i].inventory = products[storeNumberGiven][i].inventory - 1;
+        products[storeNumberGiven][i].inventory = SafeMath.sub(products[storeNumberGiven][i].inventory, 1);
       }
     }
 
     require(product.price == msg.value, "Product price and value sent must be equal");
 
-    contractBalance += product.price;
+    contractBalance = SafeMath.add(contractBalance, product.price);
 
-    for (uint i = 0; i < stores.length; i++) {
+    for (uint256 i = 0; i < stores.length; i++) {
       if (stores[i].storeNumber == storeNumberGiven) {
-        stores[i].earnings += product.price;
+        stores[i].earnings = SafeMath.add(stores[i].earnings, product.price);
       }
     }
   }
@@ -269,15 +273,19 @@ contract Shop {
   @dev Allows owner user to withdraw earnings for a specific store
   @param storeNumberGiven Store number for store to withdraw funds from
   */
-  function withdrawEarnings(uint storeNumberGiven) public
+  function withdrawEarnings(uint256 storeNumberGiven) public
   ensureNoEmergency()
   verifyOwner(msg.sender) {
-    for (uint i = 0; i < stores.length; i++) {
+    for (uint256 i = 0; i < stores.length; i++) {
       if (stores[i].storeNumber == storeNumberGiven) {
         require(contractBalance >= stores[i].earnings, "Contract must have enough balance to process this withdrawal");
+        require(stores[i].earnings > 0, "Store must have positive earnings");
 
-        msg.sender.transfer(stores[i].earnings);
+        uint256 amountToWithdraw = stores[i].earnings;
+
         stores[i].earnings = 0;
+
+        msg.sender.transfer(amountToWithdraw);
       }
     }
   }
@@ -288,7 +296,7 @@ contract Shop {
   */
   function getStoresLength() public view
   ensureNoEmergency()
-  returns(uint) {
+  returns(uint256) {
     return stores.length;
   }
 
@@ -297,9 +305,9 @@ contract Shop {
   @param storeNumberGiven Specific store number
   @return Length of products array associated with specific store
   */
-  function getProductsLength(uint storeNumberGiven) public view
+  function getProductsLength(uint256 storeNumberGiven) public view
   ensureNoEmergency()
-  returns(uint) {
+  returns(uint256) {
     return products[storeNumberGiven].length;
   }
 }
