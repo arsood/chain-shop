@@ -1,0 +1,17 @@
+{
+  "name": "chain-shop-redux",
+  "version": "1.0.0",
+  "description": "Shopping app built with Ethereum",
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/arunlearning/chain-shop-redux.git"
+  },
+  "author": "Arun Sood",
+  "homepage": "https://bitbucket.org/arunlearning/chain-shop-redux#readme",
+  "dependencies": {
+    "truffle-hdwallet-provider": "^1.0.2"
+  }
+}
