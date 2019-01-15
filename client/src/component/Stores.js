@@ -141,24 +141,34 @@ class Stores extends Component {
                           {store.city}
                         </div>
 
-                        <div className="mt-2 text-center">
-                          Earnings: {this.props.Contract.web3.utils.fromWei(store.earnings, "ether")} Ether
-                        </div>
+                        { this.props.models.User.user.userType === 2 ?
+                          <React.Fragment>
+                            <div className="mt-2 text-center">
+                              Earnings: {this.props.Contract.web3.utils.fromWei(store.earnings, "ether")} Ether
+                            </div>
 
-                        <Row className="mt-4">
-                          <Col sm="6">
-                            <a href={`/stores/${store.storeNumber}/products`} className="btn btn-info btn-block">View Products</a>
-                          </Col>
-                          <Col sm="6">
-                            <button onClick={this.deleteStore.bind(this, store.storeNumber)} className="btn btn-danger btn-block">Delete</button>
-                          </Col>
-                        </Row>
+                            <Row className="mt-4">
+                              <Col sm="6">
+                                <a href={`/stores/${store.storeNumber}/products`} className="btn btn-info btn-block">View Products</a>
+                              </Col>
+                              <Col sm="6">
+                                <button onClick={this.deleteStore.bind(this, store.storeNumber)} className="btn btn-danger btn-block">Delete</button>
+                              </Col>
+                            </Row>
 
-                        <Row className="mt-4">
-                          <Col sm="12">
-                            <button onClick={this.withdrawEarnings.bind(this, store.storeNumber, store.earnings)} className="btn btn-secondary btn-block">Withdraw Earnings</button>
-                          </Col>
-                        </Row>
+                            <Row className="mt-4">
+                              <Col sm="12">
+                                <button onClick={this.withdrawEarnings.bind(this, store.storeNumber, store.earnings)} className="btn btn-secondary btn-block">Withdraw Earnings</button>
+                              </Col>
+                            </Row>
+                          </React.Fragment>
+                        :
+                          <Row className="mt-4">
+                            <Col sm="12">
+                              <a href={`/stores/${store.storeNumber}/products`} className="btn btn-info btn-block">View Products</a>
+                            </Col>
+                          </Row>
+                        }
                       </div>
                     </div>
                   </Col>

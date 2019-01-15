@@ -113,6 +113,10 @@ class Products extends Component {
 
         <h1 className="text-center mt-3">{this.props.models.Store.store.name}'s Products</h1>
 
+        <div className="text-center">
+          <a href="/">Back to Stores</a>
+        </div>
+
         { this.props.models.User.userType === 2 ?
           <div className="mt-3 text-center">
             <a href="#" onClick={this.toggleAddProductModal}>Add New Product +</a>
