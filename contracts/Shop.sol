@@ -270,7 +270,8 @@ contract Shop {
   @param storeNumberGiven Store number for store to withdraw funds from
   */
   function withdrawEarnings(uint storeNumberGiven) public
-  ensureNoEmergency() {
+  ensureNoEmergency()
+  verifyOwner(msg.sender) {
     for (uint i = 0; i < stores.length; i++) {
       if (stores[i].storeNumber == storeNumberGiven) {
         require(contractBalance >= stores[i].earnings, "Contract must have enough balance to process this withdrawal");
