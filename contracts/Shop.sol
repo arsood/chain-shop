@@ -28,7 +28,9 @@ contract Shop {
   }
 
   // Contract owner state
+  address public contractOwner;
   uint private contractBalance;
+  bool public emergencyStop;
 
   // User state
   mapping (address => User) public users;
@@ -51,9 +53,16 @@ contract Shop {
     _;
   }
 
+  modifier ensureNoEmergency() {
+    require(emergencyStop == false, "Contract is in emergency mode");
+    _;
+  }
+
   constructor() public {
     // Initializing state
+    contractOwner = msg.sender;
     contractBalance = 0;
+    emergencyStop = false;
     storeNumber = 0;
     productNumber = 0;
 
@@ -65,11 +74,25 @@ contract Shop {
   }
 
   /*
+  @dev Toggles the emergency stop boolean
+  */
+  function toggleEmergencyStop() public {
+    require(msg.sender == contractOwner);
+
+    if (emergencyStop == false) {
+      emergencyStop = true;
+    } else {
+      emergencyStop = false;
+    }
+  }
+
+  /*
   @dev Adds an admin tied to a user's address
   @param userAddress Address of user to add as admin
   @param name Name of admin user
   */
   function addAdmin(address userAddress, string memory name) public
+  ensureNoEmergency()
   verifyAdmin(msg.sender) {
     users[userAddress] = User({
       name: name,
@@ -83,6 +106,7 @@ contract Shop {
   @param name Name of owner user
   */
   function addOwner(address userAddress, string memory name) public
+  ensureNoEmergency()
   verifyAdmin(msg.sender) {
     users[userAddress] = User({
       name: name,
@@ -96,6 +120,7 @@ contract Shop {
   @param city City of the store
   */
   function addStore(string memory name, string memory city) public
+  ensureNoEmergency()
   verifyOwner(msg.sender) {
     storeNumber = storeNumber + 1;
 
@@ -114,6 +139,7 @@ contract Shop {
   @param storeNumberGiven Store number provided
   */
   function deleteStore(uint storeNumberGiven) public
+  ensureNoEmergency()
   verifyOwner(msg.sender) {
     for (uint i = 0; i < stores.length; i++) {
       if (stores[i].storeNumber == storeNumberGiven) {
@@ -137,6 +163,7 @@ contract Shop {
   @param city City of the store to edit
   */
   function saveStoreEdits(uint storeNumberGiven, string memory name, string memory city) public
+  ensureNoEmergency()
   verifyOwner(msg.sender) {
     for (uint i = 0; i < stores.length; i++) {
       if (stores[i].storeNumber == storeNumberGiven) {
@@ -155,6 +182,7 @@ contract Shop {
   @param inventory Inventory number of the product
   */
   function addProduct(uint storeNumberGiven, string memory name, string memory description, uint price, uint inventory) public
+  ensureNoEmergency()
   verifyOwner(msg.sender) {
     productNumber = productNumber + 1;
 
@@ -174,6 +202,7 @@ contract Shop {
   @param productNumberGiven Product number assigned during creation
   */
   function deleteProduct(uint storeNumberGiven, uint productNumberGiven) public
+  ensureNoEmergency()
   verifyOwner(msg.sender) {
     for (uint i = 0; i < products[storeNumberGiven].length; i++) {
       if (products[storeNumberGiven][i].productNumber == productNumberGiven) {
@@ -194,6 +223,7 @@ contract Shop {
   @param inventory Edited inventory of product
   */
   function saveProductEdits(uint storeNumberGiven, uint productNumberGiven, string memory name, string memory description, uint price, uint inventory) public
+  ensureNoEmergency()
   verifyOwner(msg.sender) {
     for (uint i = 0; i < products[storeNumberGiven].length; i++) {
       if (products[storeNumberGiven][i].productNumber == productNumberGiven) {
@@ -210,7 +240,8 @@ contract Shop {
   @param storeNumberGiven Store number that product is associated with
   @param productNumberGiven Specific number of product to be purchased
   */
-  function buyProduct(uint storeNumberGiven, uint productNumberGiven) public payable {
+  function buyProduct(uint storeNumberGiven, uint productNumberGiven) public payable
+  ensureNoEmergency() {
     Product memory product;
 
     for (uint i = 0; i < products[storeNumberGiven].length; i++) {
@@ -238,7 +269,8 @@ contract Shop {
   @dev Allows owner user to withdraw earnings for a specific store
   @param storeNumberGiven Store number for store to withdraw funds from
   */
-  function withdrawEarnings(uint storeNumberGiven) public {
+  function withdrawEarnings(uint storeNumberGiven) public
+  ensureNoEmergency() {
     for (uint i = 0; i < stores.length; i++) {
       if (stores[i].storeNumber == storeNumberGiven) {
         require(contractBalance >= stores[i].earnings, "Contract must have enough balance to process this withdrawal");
@@ -253,7 +285,9 @@ contract Shop {
   @dev Returns the length of stores array
   @return The length of the stores array
   */
-  function getStoresLength() public view returns(uint) {
+  function getStoresLength() public view
+  ensureNoEmergency()
+  returns(uint) {
     return stores.length;
   }
 
@@ -262,7 +296,9 @@ contract Shop {
   @param storeNumberGiven Specific store number
   @return Length of products array associated with specific store
   */
-  function getProductsLength(uint storeNumberGiven) public view returns(uint) {
+  function getProductsLength(uint storeNumberGiven) public view
+  ensureNoEmergency()
+  returns(uint) {
     return products[storeNumberGiven].length;
   }
 }

@@ -13,12 +13,45 @@ class Admin extends Component {
       newAdminName: "",
       getUserAddress: "",
       newOwnerAddress: "",
-      newOwnerName: ""
+      newOwnerName: "",
+      emergencyStop: false,
+      contractOwnerAddress: ""
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.addAdmin = this.addAdmin.bind(this);
     this.addOwner = this.addOwner.bind(this);
+    this.toggleEmergencyStop = this.toggleEmergencyStop.bind(this);
+  }
+
+  getEmergencyStopState() {
+    this
+    .props
+    .Contract
+    .deployed
+    .methods
+    .emergencyStop()
+    .call()
+    .then((es) => {
+      this.setState({
+        emergencyStop: es
+      });
+    });
+  }
+
+  componentDidMount() {
+    this.getEmergencyStopState();
+
+    this
+    .props
+    .Contract
+    .deployed
+    .methods
+    .contractOwner()
+    .call()
+    .then((contractOwnerAddress) => {
+      this.setState({ contractOwnerAddress });
+    });
   }
 
   handleChange(event) {
@@ -47,6 +80,18 @@ class Admin extends Component {
     .send({ from: this.props.Contract.accounts[0] });
   }
 
+  async toggleEmergencyStop() {
+    await this
+    .props
+    .Contract
+    .deployed
+    .methods
+    .toggleEmergencyStop()
+    .send({ from: this.props.Contract.accounts[0] });
+
+    this.getEmergencyStopState();
+  }
+
   render() {
     return (
       <Container>
@@ -71,6 +116,18 @@ class Admin extends Component {
         <div className="mt-3 text-center">
           <button onClick={this.addOwner} className="btn btn-primary">Add Store Owner</button>
         </div>
+
+        { this.state.emergencyStop && this.props.Contract.accounts[0] === this.state.contractOwnerAddress ?
+          <div className="mt-4 alert alert-danger text-center">
+            Contract is in emergency stop mode
+          </div>
+        : null }
+
+        { this.props.Contract.accounts[0] === this.state.contractOwnerAddress ?
+          <div className="mt-4 text-center">
+            <button onClick={this.toggleEmergencyStop} className="btn btn-danger">Turn {this.state.emergencyStop ? "Off" : "On"} Emergency Stop Mode</button>
+          </div>
+        : null }
       </Container>
     );
   }
