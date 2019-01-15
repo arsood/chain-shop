@@ -45,7 +45,10 @@ class EditStore extends Component {
     this
     .props
     .actions
-    .saveStoreEdits(this.props.Contract.deployed, this.props.Contract.accounts, this.props.match.params.storeNumber, this.state);
+    .saveStoreEdits(this.props.Contract.deployed, this.props.Contract.accounts, this.props.match.params.storeNumber, this.state)
+    .then(() => {
+      window.location.href = "/";
+    });
   }
 
   render() {
