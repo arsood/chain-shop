@@ -31,7 +31,7 @@ class EditProduct extends Component {
       this.setState({
         name: product.name,
         description: product.description,
-        price: product.price,
+        price: this.props.Contract.web3.utils.fromWei(product.price, "ether"),
         inventory: product.inventory
       });
     });
@@ -49,7 +49,7 @@ class EditProduct extends Component {
     this
     .props
     .actions
-    .saveProductEdits(this.props.Contract.deployed, this.props.Contract.accounts, this.props.match.params.storeNumber, this.props.match.params.productNumber, this.state)
+    .saveProductEdits(this.props.Contract.deployed, this.props.Contract.accounts, this.props.Contract.web3, this.props.match.params.storeNumber, this.props.match.params.productNumber, this.state)
     .then(() => {
       window.location.href = `/stores/${this.props.match.params.storeNumber}/products`;
     });

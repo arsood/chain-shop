@@ -48,11 +48,11 @@ export const getOneProduct = (deployed, storeNumber, productNumber) => {
   }
 }
 
-export const saveProductEdits = (deployed, accounts, storeNumber, productNumber, productObj) => {
+export const saveProductEdits = (deployed, accounts, web3, storeNumber, productNumber, productObj) => {
   return async (dispatch) => {
     await deployed
     .methods
-    .saveProductEdits(storeNumber, productNumber, productObj.name, productObj.description, productObj.price, productObj.inventory)
+    .saveProductEdits(storeNumber, productNumber, productObj.name, productObj.description, web3.utils.toWei(productObj.price, "ether"), productObj.inventory)
     .send({ from: accounts[0] });
 
     return dispatch({
