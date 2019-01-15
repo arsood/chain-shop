@@ -91,6 +91,21 @@ class Products extends Component {
     .getAllProducts(this.props.Contract.deployed, this.props.match.params.storeNumber);
   }
 
+  async deleteProduct(productNumber) {
+    await this
+    .props
+    .Contract
+    .deployed
+    .methods
+    .deleteProduct(this.props.match.params.storeNumber, productNumber)
+    .send({ from: this.props.Contract.accounts[0] });
+
+    this
+    .props
+    .actions
+    .getAllProducts(this.props.Contract.deployed, this.props.match.params.storeNumber);
+  }
+
   render() {
     return (
       <Container>
@@ -107,6 +122,10 @@ class Products extends Component {
         { this.props.models.Product.products.length ?
           <Row className="mt-3">
             { this.props.models.Product.products.map((product, index) => {
+              if (product.state === "1") {
+                return false;
+              }
+
               return (
                 <Col sm="4" key={index} className="mt-3">
                   <div className="card">
@@ -128,7 +147,7 @@ class Products extends Component {
                       <Row className="mt-4">
                         { this.props.models.User.userType === 2 ?
                           <Col sm="12">
-                            <a href="" className="btn btn-danger btn-block">Delete</a>
+                            <button onClick={this.deleteProduct.bind(this, product.productNumber)} className="btn btn-danger btn-block">Delete</button>
                           </Col>
                         :
                           <Col sm="12">

@@ -2,6 +2,7 @@ pragma solidity ^0.5.0;
 
 contract Shop {
   enum UserType { Guest, Admin, Owner }
+  enum State { Active, Deleted }
 
   struct User {
     string name;
@@ -14,6 +15,7 @@ contract Shop {
     string name;
     string city;
     uint earnings;
+    State state;
   }
 
   struct Product {
@@ -22,6 +24,7 @@ contract Shop {
     string description;
     uint price;
     uint inventory;
+    State state;
   }
 
   // Contract owner state
@@ -86,7 +89,8 @@ contract Shop {
       storeNumber: storeNumber,
       name: name,
       city: city,
-      earnings: 0
+      earnings: 0,
+      state: State.Active
     }));
   }
 
@@ -99,8 +103,20 @@ contract Shop {
       name: name,
       description: description,
       price: price,
-      inventory: inventory
+      inventory: inventory,
+      state: State.Active
     }));
+  }
+
+  function deleteProduct(uint storeNumberGiven, uint productNumberGiven) public
+  verifyOwner(msg.sender) {
+    for (uint i = 0; i < products[storeNumberGiven].length; i++) {
+      if (products[storeNumberGiven][i].productNumber == productNumberGiven) {
+        delete products[storeNumberGiven][i];
+
+        products[storeNumberGiven][i].state = State.Deleted;
+      }
+    }
   }
 
   function buyProduct(uint storeNumberGiven, uint productNumberGiven) public payable {
