@@ -22,3 +22,11 @@ The easiest way to test the flow is the following:
 5. Switch to account 4 and attempt a purchase
 6. Switch back to account 3 and withdraw earnings from the transaction
 7. Use account 3 to test updating / deleting stores and products
+
+## Design Pattern Decisions
+
+To see information on design pattern decisions for this application, please refer to the [documentation here](design_pattern_decisions.md).
+
+## Avoiding Common Attacks
+
+To see information on how this application has avoided common attacks, please refer to the [documentation here](avoiding_common_attacks.md).
