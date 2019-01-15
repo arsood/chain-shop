@@ -21,3 +21,9 @@ In order to protect against this, the Shop contract makes use of SafeMath, which
 ```solidity
 contractBalance = SafeMath.add(contractBalance, product.price);
 ```
+
+## Forcibly Sending Ether
+
+It is possible to send Ether to a contract without triggering the fallback function. As a result, the contract balance can be considered more than 0 at certain points. It is important as a result to not write functionality that directly relies on the contract balance.
+
+In order to protect against malicious injections of Ether, the Shop contract relies on balance as part of the contract state that is updated only when a payment is made to buy a product. The contractBalance storage variable is updated on purchase and withdrawal using SafeMath, and the contract does not rely on `this.balance` at any point.
