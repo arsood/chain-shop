@@ -64,6 +64,11 @@ contract Shop {
     });
   }
 
+  /*
+  @dev Adds an admin tied to a user's address
+  @param userAddress Address of user to add as admin
+  @param name Name of admin user
+  */
   function addAdmin(address userAddress, string memory name) public
   verifyAdmin(msg.sender) {
     users[userAddress] = User({
@@ -72,6 +77,11 @@ contract Shop {
     });
   }
 
+  /*
+  @dev Adds an owner tied to a user's address
+  @param userAddress Address of user to add as owner
+  @param name Name of owner user
+  */
   function addOwner(address userAddress, string memory name) public
   verifyAdmin(msg.sender) {
     users[userAddress] = User({
@@ -80,6 +90,11 @@ contract Shop {
     });
   }
 
+  /*
+  @dev Adds a store tied to a specific owner
+  @param name Name of the store
+  @param city City of the store
+  */
   function addStore(string memory name, string memory city) public
   verifyOwner(msg.sender) {
     storeNumber = storeNumber + 1;
@@ -94,6 +109,10 @@ contract Shop {
     }));
   }
 
+  /*
+  @dev Deletes a store by its number assigned upon creation
+  @param storeNumberGiven Store number provided
+  */
   function deleteStore(uint storeNumberGiven) public
   verifyOwner(msg.sender) {
     for (uint i = 0; i < stores.length; i++) {
@@ -111,6 +130,12 @@ contract Shop {
     }
   }
 
+  /*
+  @dev Saves the edits to a specific store using its store number
+  @param storeNumberGiven Number of the store that was assigned on creation
+  @param name Name of the store to edit
+  @param city City of the store to edit
+  */
   function saveStoreEdits(uint storeNumberGiven, string memory name, string memory city) public
   verifyOwner(msg.sender) {
     for (uint i = 0; i < stores.length; i++) {
@@ -121,6 +146,14 @@ contract Shop {
     }
   }
 
+  /*
+  @dev Adds a product to an existing store
+  @param storeNumberGiven Number of store to add a product to
+  @param name Name of the new product
+  @param description Description of the new product
+  @param price Price of the new product in Wei
+  @param inventory Inventory number of the product
+  */
   function addProduct(uint storeNumberGiven, string memory name, string memory description, uint price, uint inventory) public
   verifyOwner(msg.sender) {
     productNumber = productNumber + 1;
@@ -135,6 +168,11 @@ contract Shop {
     }));
   }
 
+  /*
+  @dev Deletes a specific product via its associated store number and product number assined
+  @param storeNumberGiven Number of store that the product is tied to
+  @param productNumberGiven Product number assigned during creation
+  */
   function deleteProduct(uint storeNumberGiven, uint productNumberGiven) public
   verifyOwner(msg.sender) {
     for (uint i = 0; i < products[storeNumberGiven].length; i++) {
@@ -146,6 +184,15 @@ contract Shop {
     }
   }
 
+  /*
+  @dev Saves edits to a specific product
+  @param storeNumberGiven Store number that the product is tied to
+  @param productNumberGiven Product number assigned to specific product
+  @param name Edited name of product
+  @param description Edited description of product
+  @param price Edited price of the product
+  @param inventory Edited inventory of product
+  */
   function saveProductEdits(uint storeNumberGiven, uint productNumberGiven, string memory name, string memory description, uint price, uint inventory) public
   verifyOwner(msg.sender) {
     for (uint i = 0; i < products[storeNumberGiven].length; i++) {
@@ -158,6 +205,11 @@ contract Shop {
     }
   }
 
+  /*
+  @dev Allows a guest user to buy a specific product with Ether
+  @param storeNumberGiven Store number that product is associated with
+  @param productNumberGiven Specific number of product to be purchased
+  */
   function buyProduct(uint storeNumberGiven, uint productNumberGiven) public payable {
     Product memory product;
 
@@ -182,6 +234,10 @@ contract Shop {
     }
   }
 
+  /*
+  @dev Allows owner user to withdraw earnings for a specific store
+  @param storeNumberGiven Store number for store to withdraw funds from
+  */
   function withdrawEarnings(uint storeNumberGiven) public {
     for (uint i = 0; i < stores.length; i++) {
       if (stores[i].storeNumber == storeNumberGiven) {
@@ -193,10 +249,19 @@ contract Shop {
     }
   }
 
+  /*
+  @dev Returns the length of stores array
+  @return The length of the stores array
+  */
   function getStoresLength() public view returns(uint) {
     return stores.length;
   }
 
+  /*
+  @dev Returns the length of the products array for a specific store
+  @param storeNumberGiven Specific store number
+  @return Length of products array associated with specific store
+  */
   function getProductsLength(uint storeNumberGiven) public view returns(uint) {
     return products[storeNumberGiven].length;
   }

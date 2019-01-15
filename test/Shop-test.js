@@ -1,6 +1,8 @@
 const Shop = artifacts.require("./Shop.sol");
 
 contract("Shop", accounts => {
+  // This test checks to make sure we can create an admin type user
+  // This test was written to ensure user creation of a specific type is possible
   it("Should create a new admin type user", async () => {
     const shopInstance = await Shop.deployed();
 
@@ -12,6 +14,8 @@ contract("Shop", accounts => {
     expect(parseInt(newAdmin.userType)).to.equal(1);
   });
 
+  // This test checks to make sure we can create an owner type user
+  // This test was written to ensure user creation of a specific type is possible
   it("Should create a new owner type user", async () => {
     const shopInstance = await Shop.deployed();
 
@@ -23,6 +27,8 @@ contract("Shop", accounts => {
     expect(parseInt(newOwner.userType)).to.equal(2);
   });
 
+  // This test checks that a store can be added for a specific owner
+  // This test was written to ensure that a store can be created that is tied directly to an owner user
   it("Should add a store for an owner type", async () => {
     const shopInstance = await Shop.deployed();
 
@@ -35,6 +41,8 @@ contract("Shop", accounts => {
     expect(store.ownerAddress).to.equal(accounts[2]);
   });
 
+  // This test checks to see if we can add a product to a specific store
+  // This test was written to ensure that products can be associated to stores successfully
   it("Should add a product for a specific store", async () => {
     const shopInstance = await Shop.deployed();
 
@@ -47,6 +55,8 @@ contract("Shop", accounts => {
     expect(parseInt(product.price)).to.equal(5);
   });
 
+  // This test checks the capability to purchase a product using Ether
+  // This test was written to ensure that guests can send Ether to the contract which will be used to purchase a specific inventory item
   it("Should buy a product for a specific store", async () => {
     const shopInstance = await Shop.deployed();
 
