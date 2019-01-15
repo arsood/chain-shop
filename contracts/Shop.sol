@@ -94,6 +94,23 @@ contract Shop {
     }));
   }
 
+  function deleteStore(uint storeNumberGiven) public
+  verifyOwner(msg.sender) {
+    for (uint i = 0; i < stores.length; i++) {
+      if (stores[i].storeNumber == storeNumberGiven) {
+        delete stores[i];
+
+        stores[i].state = State.Deleted;
+      }
+    }
+
+    for (uint i = 0; i < products[storeNumberGiven].length; i++) {
+      delete products[storeNumberGiven][i];
+
+      products[storeNumberGiven][i].state = State.Deleted;
+    }
+  }
+
   function addProduct(uint storeNumberGiven, string memory name, string memory description, uint price, uint inventory) public
   verifyOwner(msg.sender) {
     productNumber = productNumber + 1;

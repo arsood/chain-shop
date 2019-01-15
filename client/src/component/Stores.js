@@ -94,6 +94,21 @@ class Stores extends Component {
     .actions
     .getAllStores(this.props.Contract.deployed, this.props.models.User.userType === 2, this.props.Contract.accounts[0]);
   }
+
+  async deleteStore(storeNumber) {
+    await this
+    .props
+    .Contract
+    .deployed
+    .methods
+    .deleteStore(storeNumber)
+    .send({ from: this.props.Contract.accounts[0] });
+
+    this
+    .props
+    .actions
+    .getAllStores(this.props.Contract.deployed, this.props.models.User.userType === 2, this.props.Contract.accounts[0]);
+  }
   
   render() {
     return (
@@ -112,6 +127,10 @@ class Stores extends Component {
           { this.props.models.Store.stores.length ?
             <Row className="mt-3">
               { this.props.models.Store.stores.map((store, index) => {
+                if (store.state === "1") {
+                  return false;
+                }
+
                 return (
                   <Col sm="4" key={index} className="mt-3">
                     <div className="card">
@@ -131,7 +150,7 @@ class Stores extends Component {
                             <a href={`/stores/${store.storeNumber}/products`} className="btn btn-info btn-block">View Products</a>
                           </Col>
                           <Col sm="6">
-                            <a href="" className="btn btn-danger btn-block">Delete</a>
+                            <button onClick={this.deleteStore.bind(this, store.storeNumber)} className="btn btn-danger btn-block">Delete</button>
                           </Col>
                         </Row>
 
