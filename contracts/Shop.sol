@@ -111,6 +111,16 @@ contract Shop {
     }
   }
 
+  function saveStoreEdits(uint storeNumberGiven, string memory name, string memory city) public
+  verifyOwner(msg.sender) {
+    for (uint i = 0; i < stores.length; i++) {
+      if (stores[i].storeNumber == storeNumberGiven) {
+        stores[i].name = name;
+        stores[i].city = city;
+      }
+    }
+  }
+
   function addProduct(uint storeNumberGiven, string memory name, string memory description, uint price, uint inventory) public
   verifyOwner(msg.sender) {
     productNumber = productNumber + 1;
@@ -132,6 +142,18 @@ contract Shop {
         delete products[storeNumberGiven][i];
 
         products[storeNumberGiven][i].state = State.Deleted;
+      }
+    }
+  }
+
+  function saveProductEdits(uint storeNumberGiven, uint productNumberGiven, string memory name, string memory description, uint price, uint inventory) public
+  verifyOwner(msg.sender) {
+    for (uint i = 0; i < products[storeNumberGiven].length; i++) {
+      if (products[storeNumberGiven][i].productNumber == productNumberGiven) {
+        products[storeNumberGiven][i].name = name;
+        products[storeNumberGiven][i].description = description;
+        products[storeNumberGiven][i].price = price;
+        products[storeNumberGiven][i].inventory = inventory;
       }
     }
   }

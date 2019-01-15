@@ -153,6 +153,10 @@ class Stores extends Component {
                               Earnings: {this.props.Contract.web3.utils.fromWei(store.earnings, "ether")} Ether
                             </div>
 
+                            <div className="text-center mt-3">
+                              <a href={`/stores/${store.storeNumber}/edit`}>Edit Store</a>
+                            </div>
+
                             <Row className="mt-4">
                               <Col sm="6">
                                 <a href={`/stores/${store.storeNumber}/products`} className="btn btn-info btn-block">View Products</a>

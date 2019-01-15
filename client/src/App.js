@@ -9,6 +9,7 @@ import createStore from "./config/createStore";
 
 import Home from "./component/Home";
 import Products from "./component/Products";
+import EditStore from "./component/EditStore";
 
 import "./App.css";
 
@@ -82,6 +83,7 @@ class App extends Component {
             <Switch>
               <Route exact path="/" component={Home} />
               <Route exact path="/stores/:storeNumber/products" component={Products} />
+              <Route exact path="/stores/:storeNumber/edit" component={EditStore} />
             </Switch>
           </Router>
         </Provider>

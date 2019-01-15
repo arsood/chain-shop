@@ -1,6 +1,11 @@
+import update from "immutability-helper";
+
 const initialState = {
   stores: [],
-  store: {}
+  store: {
+    name: "",
+    city: ""
+  }
 };
 
 const Store = (state = initialState, action) => {

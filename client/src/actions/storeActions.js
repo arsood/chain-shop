@@ -1,3 +1,5 @@
+import { bindActionCreators } from "../../../../../../Library/Caches/typescript/3.2/node_modules/redux";
+
 export const getAllStores = (deployed, isStoreOwner, ownerAddress) => {
   return async (dispatch) => {
     const storesLength = await deployed
@@ -43,11 +45,26 @@ export const getOneStore = (deployed, storeNumber) => {
       .call();
 
       if (store.storeNumber === storeNumber) {
-        return dispatch({
+        dispatch({
           type: "GET_ONE_STORE_SUCCESS",
           payload: store
         });
+
+        return store;
       }
     }
+  }
+}
+
+export const saveStoreEdits = (deployed, accounts, storeNumber, storeObj) => {
+  return async (dispatch) => {
+    await deployed
+    .methods
+    .saveStoreEdits(storeNumber, storeObj.name, storeObj.city)
+    .send({ from: accounts[0] });
+
+    return dispatch({
+      type: "SAVE_STORE_EDITS_SUCCESS"
+    });
   }
 }
