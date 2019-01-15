@@ -92,6 +92,12 @@ class Products extends Component {
   }
 
   async deleteProduct(productNumber) {
+    const deleteConfirm = window.confirm("Are you sure you want to delete this product?");
+
+    if (!deleteConfirm) {
+      return false;
+    }
+
     await this
     .props
     .Contract

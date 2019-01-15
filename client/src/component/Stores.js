@@ -96,6 +96,12 @@ class Stores extends Component {
   }
 
   async deleteStore(storeNumber) {
+    const deleteConfirm = window.confirm("Are you sure you want to delete this store?");
+
+    if (!deleteConfirm) {
+      return false;
+    }
+    
     await this
     .props
     .Contract
@@ -141,7 +147,7 @@ class Stores extends Component {
                           {store.city}
                         </div>
 
-                        { this.props.models.User.user.userType === 2 ?
+                        { this.props.models.User.userType === 2 ?
                           <React.Fragment>
                             <div className="mt-2 text-center">
                               Earnings: {this.props.Contract.web3.utils.fromWei(store.earnings, "ether")} Ether
