@@ -154,9 +154,11 @@ class Products extends Component {
                         Number Available: {product.inventory}
                       </div>
 
-                      <div className="mt-3 text-center">
-                        <a href={`/stores/${this.props.match.params.storeNumber}/products/${product.productNumber}/edit`}>Edit Product</a>
-                      </div>
+                      { this.props.models.User.userType === 2 ?
+                        <div className="mt-3 text-center">
+                          <a href={`/stores/${this.props.match.params.storeNumber}/products/${product.productNumber}/edit`}>Edit Product</a>
+                        </div>
+                      : null }
 
                       <Row className="mt-4">
                         { this.props.models.User.userType === 2 ?
