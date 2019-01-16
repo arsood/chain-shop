@@ -41,6 +41,20 @@ contract("Shop", accounts => {
     expect(store.ownerAddress).to.equal(accounts[2]);
   });
 
+  // This test checks that a store's name and city can be updated
+  // This test was written to ensure that the edit functionality works properly
+  it("Should edit a specific store", async () => {
+    const shopInstance = await Shop.deployed();
+
+    await shopInstance
+    .saveStoreEdits(1, "New Name Here", "New City Here", { from: accounts[2] });
+
+    const store = await shopInstance.stores(0);
+
+    expect(store.name).to.equal("New Name Here");
+    expect(store.city).to.equal("New City Here");
+  });
+
   // This test checks to see if we can add a product to a specific store
   // This test was written to ensure that products can be associated to stores successfully
   it("Should add a product for a specific store", async () => {
@@ -67,4 +81,17 @@ contract("Shop", accounts => {
 
     expect(parseInt(product.inventory)).to.equal(9);
   });
+
+  // This test checks the ability to delete a store with its associated products
+  // This test was written to make sure stores can be deleted and associated products are also removed
+  it("Should delete a store with its products", async () => {
+    const shopInstance = await Shop.deployed();
+
+    await shopInstance
+    .deleteStore(1, { from: accounts[2] });
+
+    const product = await shopInstance.products(1, 0);
+
+    expect(parseInt(product.state)).to.equal(1);
+  }); 
 });
