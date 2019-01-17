@@ -7,13 +7,13 @@ export const getAllStores = (deployed, isStoreOwner, ownerAddress) => {
 
     let stores = [];
 
-    for (let i = 1; i < storesLength; i++) {
+    for (let i = 1; i <= storesLength; i++) {
       let store = await deployed
       .methods
       .stores(i)
       .call();
 
-      if (parseInt(store.state === 0)) {
+      if (parseInt(store.state) === 0) {
         stores.push(store);
       }
     }
