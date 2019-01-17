@@ -41,7 +41,7 @@ contract Shop {
 
   // Store state
   uint256 public storeNumber;
-  Store[] public stores;
+  mapping (uint256 => Store) public stores;
 
   // Product state
   uint256 public productNumber;
@@ -128,14 +128,14 @@ contract Shop {
   verifyOwner(msg.sender) {
     storeNumber = storeNumber + 1;
 
-    stores.push(Store({
+    stores[storeNumber] = Store({
       ownerAddress: msg.sender,
       storeNumber: storeNumber,
       name: name,
       city: city,
       earnings: 0,
       state: State.Active
-    }));
+    });
   }
 
   /*
@@ -145,13 +145,9 @@ contract Shop {
   function deleteStore(uint256 storeNumberGiven) public
   ensureNoEmergency()
   verifyOwner(msg.sender) {
-    for (uint256 i = 0; i < stores.length; i++) {
-      if (stores[i].storeNumber == storeNumberGiven) {
-        delete stores[i];
+    delete stores[storeNumberGiven];
 
-        stores[i].state = State.Deleted;
-      }
-    }
+    stores[storeNumberGiven].state = State.Deleted;
 
     for (uint256 i = 0; i < products[storeNumberGiven].length; i++) {
       delete products[storeNumberGiven][i];
@@ -169,12 +165,8 @@ contract Shop {
   function saveStoreEdits(uint256 storeNumberGiven, string memory name, string memory city) public
   ensureNoEmergency()
   verifyOwner(msg.sender) {
-    for (uint256 i = 0; i < stores.length; i++) {
-      if (stores[i].storeNumber == storeNumberGiven) {
-        stores[i].name = name;
-        stores[i].city = city;
-      }
-    }
+    stores[storeNumberGiven].name = name;
+    stores[storeNumberGiven].city = city;
   }
 
   /*
@@ -262,11 +254,7 @@ contract Shop {
 
     contractBalance = SafeMath.add(contractBalance, product.price);
 
-    for (uint256 i = 0; i < stores.length; i++) {
-      if (stores[i].storeNumber == storeNumberGiven) {
-        stores[i].earnings = SafeMath.add(stores[i].earnings, product.price);
-      }
-    }
+    stores[storeNumberGiven].earnings = SafeMath.add(stores[storeNumberGiven].earnings, product.price);
   }
 
   /*
@@ -276,28 +264,14 @@ contract Shop {
   function withdrawEarnings(uint256 storeNumberGiven) public
   ensureNoEmergency()
   verifyOwner(msg.sender) {
-    for (uint256 i = 0; i < stores.length; i++) {
-      if (stores[i].storeNumber == storeNumberGiven) {
-        require(contractBalance >= stores[i].earnings, "Contract must have enough balance to process this withdrawal");
-        require(stores[i].earnings > 0, "Store must have positive earnings");
+    require(contractBalance >= stores[storeNumberGiven].earnings, "Contract must have enough balance to process this withdrawal");
+    require(stores[storeNumberGiven].earnings > 0, "Store must have positive earnings");
+    
+    uint256 amountToWithdraw = stores[storeNumberGiven].earnings;
 
-        uint256 amountToWithdraw = stores[i].earnings;
+    stores[storeNumberGiven].earnings = 0;
 
-        stores[i].earnings = 0;
-
-        msg.sender.transfer(amountToWithdraw);
-      }
-    }
-  }
-
-  /*
-  @dev Returns the length of stores array
-  @return The length of the stores array
-  */
-  function getStoresLength() public view
-  ensureNoEmergency()
-  returns(uint256) {
-    return stores.length;
+    msg.sender.transfer(amountToWithdraw);
   }
 
   /*

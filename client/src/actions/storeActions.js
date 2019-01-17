@@ -2,18 +2,20 @@ export const getAllStores = (deployed, isStoreOwner, ownerAddress) => {
   return async (dispatch) => {
     const storesLength = await deployed
     .methods
-    .getStoresLength()
+    .storeNumber()
     .call();
 
     let stores = [];
 
-    for (let i = 0; i < storesLength; i++) {
+    for (let i = 1; i < storesLength; i++) {
       let store = await deployed
       .methods
       .stores(i)
       .call();
 
-      stores.push(store);
+      if (parseInt(store.state === 0)) {
+        stores.push(store);
+      }
     }
 
     if (isStoreOwner) {
@@ -31,26 +33,17 @@ export const getAllStores = (deployed, isStoreOwner, ownerAddress) => {
 
 export const getOneStore = (deployed, storeNumber) => {
   return async (dispatch) => {
-    const storesLength = await deployed
+    let store = await deployed
     .methods
-    .getStoresLength()
+    .stores(storeNumber)
     .call();
 
-    for (let i = 0; i < storesLength; i++) {
-      let store = await deployed
-      .methods
-      .stores(i)
-      .call();
+    dispatch({
+      type: "GET_ONE_STORE_SUCCESS",
+      payload: store
+    });
 
-      if (store.storeNumber === storeNumber) {
-        dispatch({
-          type: "GET_ONE_STORE_SUCCESS",
-          payload: store
-        });
-
-        return store;
-      }
-    }
+    return store;
   }
 }
 
