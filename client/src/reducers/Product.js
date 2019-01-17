@@ -1,5 +1,3 @@
-import update from "immutability-helper";
-
 const initialState = {
   products: [],
   product: {}
@@ -14,10 +12,8 @@ const Product = (state = initialState, action) => {
     }
 
     case "GET_ONE_PRODUCT_SUCCESS": {
-      return update(state, {
-        product: {
-          $merge: action.payload
-        }
+      return Object.assign({}, state, {
+        product: action.payload
       });
     }
 

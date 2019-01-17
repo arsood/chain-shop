@@ -54,7 +54,7 @@ class Products extends Component {
   }
 
   async addProduct() {
-    const newProduct = await this
+    await this
     .props
     .Contract
     .deployed

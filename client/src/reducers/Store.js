@@ -1,5 +1,3 @@
-import update from "immutability-helper";
-
 const initialState = {
   stores: [],
   store: {
