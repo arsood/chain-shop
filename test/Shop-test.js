@@ -35,7 +35,7 @@ contract("Shop", accounts => {
     await shopInstance
     .addStore("Test Store", "San Francisco, CA", { from: accounts[2] });
 
-    const store = await shopInstance.stores(0);
+    const store = await shopInstance.stores(1);
 
     expect(parseInt(store.storeNumber)).to.equal(1);
     expect(store.ownerAddress).to.equal(accounts[2]);
@@ -49,7 +49,7 @@ contract("Shop", accounts => {
     await shopInstance
     .saveStoreEdits(1, "New Name Here", "New City Here", { from: accounts[2] });
 
-    const store = await shopInstance.stores(0);
+    const store = await shopInstance.stores(1);
 
     expect(store.name).to.equal("New Name Here");
     expect(store.city).to.equal("New City Here");
