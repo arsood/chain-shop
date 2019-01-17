@@ -63,7 +63,7 @@ contract("Shop", accounts => {
     await shopInstance
     .addProduct(1, "Sandwich", "It is good", 5, 10, { from: accounts[2] });
 
-    const product = await shopInstance.products(1, 0);
+    const product = await shopInstance.products(1, 1);
 
     expect(product.name).to.equal("Sandwich");
     expect(parseInt(product.price)).to.equal(5);
@@ -77,7 +77,7 @@ contract("Shop", accounts => {
     await shopInstance
     .buyProduct(1, 1, { from: accounts[3], value: "5" });
 
-    const product = await shopInstance.products(1, 0);
+    const product = await shopInstance.products(1, 1);
 
     expect(parseInt(product.inventory)).to.equal(9);
   });
@@ -90,8 +90,10 @@ contract("Shop", accounts => {
     await shopInstance
     .deleteStore(1, { from: accounts[2] });
 
-    const product = await shopInstance.products(1, 0);
+    const store = await shopInstance.stores(1);
+    const product = await shopInstance.products(1, 1);
 
+    expect(parseInt(store.state)).to.equal(1);
     expect(parseInt(product.state)).to.equal(1);
   }); 
 });

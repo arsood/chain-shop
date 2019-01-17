@@ -149,7 +149,7 @@ contract Shop {
 
     stores[storeNumberGiven].state = State.Deleted;
 
-    for (uint256 i = 1; i <= stores[storeNumberGiven].productNumber; i++) {
+    for (uint256 i = 1; i <= stores[storeNumberGiven].productNumber + 1; i++) {
       delete products[storeNumberGiven][i];
 
       products[storeNumberGiven][i].state = State.Deleted;
