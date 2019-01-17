@@ -1,19 +1,23 @@
 export const getAllProducts = (deployed, storeNumber) => {
   return async (dispatch) => {
-    const productsLength = await deployed
+    const store = await deployed
     .methods
-    .getProductsLength(storeNumber)
+    .stores(storeNumber)
     .call();
+
+    const productsLength = store.productNumber;
 
     let products = [];
 
-    for (let i = 0; i < productsLength; i++) {
+    for (let i = 1; i <= productsLength; i++) {
       let product = await deployed
       .methods
       .products(storeNumber, i)
       .call();
 
-      products.push(product);
+      if (parseInt(product.state) === 0) {
+        products.push(product);
+      }
     }
 
     dispatch({
@@ -25,26 +29,17 @@ export const getAllProducts = (deployed, storeNumber) => {
 
 export const getOneProduct = (deployed, storeNumber, productNumber) => {
   return async (dispatch) => {
-    const productsLength = await deployed
+    let product = await deployed
     .methods
-    .getProductsLength(storeNumber)
+    .products(storeNumber, productNumber)
     .call();
 
-    for (let i = 0; i < productsLength; i++) {
-      let product = await deployed
-      .methods
-      .products(storeNumber, i)
-      .call();
+    dispatch({
+      type: "GET_ONE_PRODUCT_SUCCESS",
+      payload: product
+    });
 
-      if (product.productNumber === productNumber) {
-        dispatch({
-          type: "GET_ONE_PRODUCT_SUCCESS",
-          payload: product
-        });
-
-        return product;
-      }
-    }
+    return product;
   }
 }
 

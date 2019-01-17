@@ -14,11 +14,12 @@ contract Shop {
   }
 
   struct Store {
-    address ownerAddress;
     uint256 storeNumber;
+    address ownerAddress;
     string name;
     string city;
     uint256 earnings;
+    uint256 productNumber;
     State state;
   }
 
@@ -44,8 +45,7 @@ contract Shop {
   mapping (uint256 => Store) public stores;
 
   // Product state
-  uint256 public productNumber;
-  mapping (uint256 => Product[]) public products;
+  mapping (uint256 => mapping (uint256 => Product)) public products;
 
   modifier verifyAdmin(address userAddress) {
     require(users[userAddress].userType == UserType.Admin, "User must be an admin");
@@ -68,7 +68,6 @@ contract Shop {
     contractBalance = 0;
     emergencyStop = false;
     storeNumber = 0;
-    productNumber = 0;
 
     // Add contract owner as an admin
     users[msg.sender] = User({
@@ -129,11 +128,12 @@ contract Shop {
     storeNumber = storeNumber + 1;
 
     stores[storeNumber] = Store({
-      ownerAddress: msg.sender,
       storeNumber: storeNumber,
+      ownerAddress: msg.sender,
       name: name,
       city: city,
       earnings: 0,
+      productNumber: 0,
       state: State.Active
     });
   }
@@ -149,7 +149,7 @@ contract Shop {
 
     stores[storeNumberGiven].state = State.Deleted;
 
-    for (uint256 i = 0; i < products[storeNumberGiven].length; i++) {
+    for (uint256 i = 1; i <= stores[storeNumberGiven].productNumber; i++) {
       delete products[storeNumberGiven][i];
 
       products[storeNumberGiven][i].state = State.Deleted;
@@ -180,16 +180,16 @@ contract Shop {
   function addProduct(uint256 storeNumberGiven, string memory name, string memory description, uint256 price, uint256 inventory) public
   ensureNoEmergency()
   verifyOwner(msg.sender) {
-    productNumber = productNumber + 1;
+    stores[storeNumberGiven].productNumber = stores[storeNumberGiven].productNumber + 1;
 
-    products[storeNumberGiven].push(Product({
-      productNumber: productNumber,
+    products[storeNumberGiven][stores[storeNumberGiven].productNumber] = Product({
+      productNumber: stores[storeNumberGiven].productNumber,
       name: name,
       description: description,
       price: price,
       inventory: inventory,
       state: State.Active
-    }));
+    });
   }
 
   /*
@@ -200,13 +200,9 @@ contract Shop {
   function deleteProduct(uint256 storeNumberGiven, uint256 productNumberGiven) public
   ensureNoEmergency()
   verifyOwner(msg.sender) {
-    for (uint256 i = 0; i < products[storeNumberGiven].length; i++) {
-      if (products[storeNumberGiven][i].productNumber == productNumberGiven) {
-        delete products[storeNumberGiven][i];
+    delete products[storeNumberGiven][productNumberGiven];
 
-        products[storeNumberGiven][i].state = State.Deleted;
-      }
-    }
+    products[storeNumberGiven][productNumberGiven].state = State.Deleted;
   }
 
   /*
@@ -221,14 +217,10 @@ contract Shop {
   function saveProductEdits(uint256 storeNumberGiven, uint256 productNumberGiven, string memory name, string memory description, uint256 price, uint256 inventory) public
   ensureNoEmergency()
   verifyOwner(msg.sender) {
-    for (uint256 i = 0; i < products[storeNumberGiven].length; i++) {
-      if (products[storeNumberGiven][i].productNumber == productNumberGiven) {
-        products[storeNumberGiven][i].name = name;
-        products[storeNumberGiven][i].description = description;
-        products[storeNumberGiven][i].price = price;
-        products[storeNumberGiven][i].inventory = inventory;
-      }
-    }
+    products[storeNumberGiven][productNumberGiven].name = name;
+    products[storeNumberGiven][productNumberGiven].description = description;
+    products[storeNumberGiven][productNumberGiven].price = price;
+    products[storeNumberGiven][productNumberGiven].inventory = inventory;
   }
 
   /*
@@ -238,17 +230,11 @@ contract Shop {
   */
   function buyProduct(uint256 storeNumberGiven, uint256 productNumberGiven) public payable
   ensureNoEmergency() {
-    Product memory product;
+    Product memory product = products[storeNumberGiven][productNumberGiven];
 
-    for (uint256 i = 0; i < products[storeNumberGiven].length; i++) {
-      if (products[storeNumberGiven][i].productNumber == productNumberGiven) {
-        product = products[storeNumberGiven][i];
+    require(product.inventory >= 1, "Store must have inventory of this product");
 
-        require(product.inventory >= 1, "Store must have inventory of this product");
-
-        products[storeNumberGiven][i].inventory = SafeMath.sub(products[storeNumberGiven][i].inventory, 1);
-      }
-    }
+    products[storeNumberGiven][productNumberGiven].inventory = SafeMath.sub(product.inventory, 1);
 
     require(product.price == msg.value, "Product price and value sent must be equal");
 
@@ -272,16 +258,5 @@ contract Shop {
     stores[storeNumberGiven].earnings = 0;
 
     msg.sender.transfer(amountToWithdraw);
-  }
-
-  /*
-  @dev Returns the length of the products array for a specific store
-  @param storeNumberGiven Specific store number
-  @return Length of products array associated with specific store
-  */
-  function getProductsLength(uint256 storeNumberGiven) public view
-  ensureNoEmergency()
-  returns(uint256) {
-    return products[storeNumberGiven].length;
   }
 }
