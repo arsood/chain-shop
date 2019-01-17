@@ -167,7 +167,7 @@ class Products extends Component {
                           </Col>
                         :
                           <Col sm="12">
-                            <button onClick={this.buyProduct.bind(this, product.productNumber, product.price)} className="btn btn-success btn-block">Buy Now</button>
+                            <button onClick={this.buyProduct.bind(this, product.productNumber, product.price)} className="btn btn-success btn-block" disabled={product.inventory === "0" ? "disabled" : ""}>Buy Now</button>
                           </Col>
                         }
                       </Row>
