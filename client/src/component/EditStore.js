@@ -24,7 +24,7 @@ class EditStore extends Component {
     this
     .props
     .actions
-    .getOneStore(this.props.Contract.deployed, this.props.match.params.storeNumber)
+    .getOneStore(this.props.Contract, this.props.match.params.storeNumber)
     .then((store) => {
       this.setState({
         name: store.name,
@@ -45,7 +45,7 @@ class EditStore extends Component {
     this
     .props
     .actions
-    .saveStoreEdits(this.props.Contract.deployed, this.props.Contract.accounts, this.props.match.params.storeNumber, this.state)
+    .saveStoreEdits(this.props.Contract, this.props.Contract.accounts, this.props.match.params.storeNumber, this.state)
     .then(() => {
       window.location.href = "/";
     });

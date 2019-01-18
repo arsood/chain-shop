@@ -27,7 +27,7 @@ class Stores extends Component {
     this
     .props
     .actions
-    .getAllStores(this.props.Contract.deployed, this.props.models.User.userType === 2, this.props.Contract.accounts[0]);
+    .getAllStores(this.props.Contract, this.props.models.User.userType === 2, this.props.Contract.accounts[0]);
   }
 
   handleChange(event) {
@@ -40,7 +40,7 @@ class Stores extends Component {
     this
     .props
     .actions
-    .addStore(this.props.Contract.deployed, this.props.Contract.accounts, this.state.newStoreName, this.state.newStoreCity)
+    .addStore(this.props.Contract, this.props.Contract.accounts, this.state.newStoreName, this.state.newStoreCity)
     .then(() => {
       this.setState({
         newStoreName: "",
@@ -51,7 +51,7 @@ class Stores extends Component {
       this
       .props
       .actions
-      .getAllStores(this.props.Contract.deployed);
+      .getAllStores(this.props.Contract, this.props.models.User.userType === 2, this.props.Contract.accounts[0]);
     });
   }
 
@@ -84,7 +84,7 @@ class Stores extends Component {
       this
       .props
       .actions
-      .getAllStores(this.props.Contract.deployed, this.props.models.User.userType === 2, this.props.Contract.accounts[0]);
+      .getAllStores(this.props.Contract, this.props.models.User.userType === 2, this.props.Contract.accounts[0]);
     });
   }
 
@@ -103,7 +103,7 @@ class Stores extends Component {
       this
       .props
       .actions
-      .getAllStores(this.props.Contract.deployed, this.props.models.User.userType === 2, this.props.Contract.accounts[0]);
+      .getAllStores(this.props.Contract, this.props.models.User.userType === 2, this.props.Contract.accounts[0]);
     });
   }
   

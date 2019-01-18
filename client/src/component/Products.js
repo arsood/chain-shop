@@ -34,7 +34,7 @@ class Products extends Component {
     this
     .props
     .actions
-    .getOneStore(this.props.Contract.deployed, this.props.match.params.storeNumber);
+    .getOneStore(this.props.Contract, this.props.match.params.storeNumber);
   }
 
   toggleAddProductModal(event) {

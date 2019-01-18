@@ -1,6 +1,7 @@
-export const getAllStores = (deployed, isStoreOwner, ownerAddress) => {
+export const getAllStores = (Contract, isStoreOwner, ownerAddress) => {
   return async (dispatch) => {
-    const storesLength = await deployed
+    const storesLength = await Contract
+    .deployed
     .methods
     .storeNumber()
     .call();
@@ -8,7 +9,8 @@ export const getAllStores = (deployed, isStoreOwner, ownerAddress) => {
     let stores = [];
 
     for (let i = 1; i <= storesLength; i++) {
-      let store = await deployed
+      let store = await Contract
+      .deployed
       .methods
       .stores(i)
       .call();
@@ -31,9 +33,10 @@ export const getAllStores = (deployed, isStoreOwner, ownerAddress) => {
   }
 }
 
-export const getOneStore = (deployed, storeNumber) => {
+export const getOneStore = (Contract, storeNumber) => {
   return async (dispatch) => {
-    let store = await deployed
+    let store = await Contract
+    .deployed
     .methods
     .stores(storeNumber)
     .call();
@@ -47,9 +50,10 @@ export const getOneStore = (deployed, storeNumber) => {
   }
 }
 
-export const saveStoreEdits = (deployed, accounts, storeNumber, storeObj) => {
+export const saveStoreEdits = (Contract, accounts, storeNumber, storeObj) => {
   return async (dispatch) => {
-    await deployed
+    await Contract
+    .deployed
     .methods
     .saveStoreEdits(storeNumber, storeObj.name, storeObj.city)
     .send({ from: accounts[0] });
@@ -60,14 +64,15 @@ export const saveStoreEdits = (deployed, accounts, storeNumber, storeObj) => {
   }
 }
 
-export const addStore = (deployed, accounts, name, city) => {
+export const addStore = (Contract, accounts, name, city) => {
   return (dispatch) => {
     dispatch({
       type: "LOADING_START",
       payload: "ADD_STORE_LOADING"
     });
 
-    return deployed
+    return Contract
+    .deployed
     .methods
     .addStore(name, city)
     .send({ from: accounts[0] })
