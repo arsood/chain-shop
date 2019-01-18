@@ -40,7 +40,7 @@ class Stores extends Component {
     this
     .props
     .actions
-    .addStore(this.props.Contract, this.props.Contract.accounts, this.state.newStoreName, this.state.newStoreCity)
+    .addStore(this.props.Contract, this.state.newStoreName, this.state.newStoreCity)
     .then(() => {
       this.setState({
         newStoreName: "",

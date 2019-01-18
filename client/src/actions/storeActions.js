@@ -50,13 +50,13 @@ export const getOneStore = (Contract, storeNumber) => {
   }
 }
 
-export const saveStoreEdits = (Contract, accounts, storeNumber, storeObj) => {
+export const saveStoreEdits = (Contract, storeNumber, storeObj) => {
   return async (dispatch) => {
     await Contract
     .deployed
     .methods
     .saveStoreEdits(storeNumber, storeObj.name, storeObj.city)
-    .send({ from: accounts[0] });
+    .send({ from: Contract.accounts[0] });
 
     return dispatch({
       type: "SAVE_STORE_EDITS_SUCCESS"
@@ -64,7 +64,7 @@ export const saveStoreEdits = (Contract, accounts, storeNumber, storeObj) => {
   }
 }
 
-export const addStore = (Contract, accounts, name, city) => {
+export const addStore = (Contract, name, city) => {
   return (dispatch) => {
     dispatch({
       type: "LOADING_START",
@@ -75,7 +75,7 @@ export const addStore = (Contract, accounts, name, city) => {
     .deployed
     .methods
     .addStore(name, city)
-    .send({ from: accounts[0] })
+    .send({ from: Contract.accounts[0] })
     .then(() => {
       dispatch({
         type: "LOADING_STOP",

@@ -45,7 +45,7 @@ class EditStore extends Component {
     this
     .props
     .actions
-    .saveStoreEdits(this.props.Contract, this.props.Contract.accounts, this.props.match.params.storeNumber, this.state)
+    .saveStoreEdits(this.props.Contract, this.props.match.params.storeNumber, this.state)
     .then(() => {
       window.location.href = "/";
     });
