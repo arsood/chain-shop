@@ -36,23 +36,22 @@ class Stores extends Component {
     });
   }
 
-  addStore() {
+  async addStore() {
+    await this
+    .props
+    .actions
+    .addStore(this.props.Contract, this.state.newStoreName, this.state.newStoreCity);
+
+    this.setState({
+      newStoreName: "",
+      newStoreCity: "",
+      showAddStoreModal: false
+    });
+
     this
     .props
     .actions
-    .addStore(this.props.Contract, this.state.newStoreName, this.state.newStoreCity)
-    .then(() => {
-      this.setState({
-        newStoreName: "",
-        newStoreCity: "",
-        showAddStoreModal: false
-      });
-
-      this
-      .props
-      .actions
-      .getAllStores(this.props.Contract, this.props.models.User.userType === 2, this.props.Contract.accounts[0]);
-    });
+    .getAllStores(this.props.Contract, this.props.models.User.userType === 2, this.props.Contract.accounts[0]);
   }
 
   toggleAddStoreModal(event) {
@@ -76,16 +75,15 @@ class Stores extends Component {
       return false;
     }
 
+    await this
+    .props
+    .actions
+    .withdrawEarnings(this.props.Contract, storeNumber);
+
     this
     .props
     .actions
-    .withdrawEarnings(this.props.Contract, storeNumber)
-    .then(() => {
-      this
-      .props
-      .actions
-      .getAllStores(this.props.Contract, this.props.models.User.userType === 2, this.props.Contract.accounts[0]);
-    });
+    .getAllStores(this.props.Contract, this.props.models.User.userType === 2, this.props.Contract.accounts[0]);
   }
 
   async deleteStore(storeNumber) {
@@ -95,16 +93,15 @@ class Stores extends Component {
       return false;
     }
     
+    await this
+    .props
+    .actions
+    .deleteStore(this.props.Contract, storeNumber);
+    
     this
     .props
     .actions
-    .deleteStore(this.props.Contract, storeNumber)
-    .then(() => {
-      this
-      .props
-      .actions
-      .getAllStores(this.props.Contract, this.props.models.User.userType === 2, this.props.Contract.accounts[0]);
-    });
+    .getAllStores(this.props.Contract, this.props.models.User.userType === 2, this.props.Contract.accounts[0]);
   }
   
   render() {

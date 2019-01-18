@@ -4,6 +4,7 @@ import { bindActionCreators } from "redux";
 import { Container } from "reactstrap";
 
 import CurrentState from "./CurrentState";
+import Loading from "./Loading";
 
 import { getOneStore, saveStoreEdits } from "../actions/storeActions";
 
@@ -20,16 +21,15 @@ class EditStore extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  componentDidMount() {
-    this
+  async componentDidMount() {
+    const store = await this
     .props
     .actions
-    .getOneStore(this.props.Contract, this.props.match.params.storeNumber)
-    .then((store) => {
-      this.setState({
-        name: store.name,
-        city: store.city
-      });
+    .getOneStore(this.props.Contract, this.props.match.params.storeNumber);
+    
+    this.setState({
+      name: store.name,
+      city: store.city
     });
   }
 
@@ -39,21 +39,22 @@ class EditStore extends Component {
     });
   }
 
-  handleSubmit(event) {
+  async handleSubmit(event) {
     event.preventDefault();
 
-    this
+    await this
     .props
     .actions
-    .saveStoreEdits(this.props.Contract, this.props.match.params.storeNumber, this.state)
-    .then(() => {
-      window.location.href = "/";
-    });
+    .saveStoreEdits(this.props.Contract, this.props.match.params.storeNumber, this.state);
+    
+    window.location.href = "/";
   }
 
   render() {
     return (
       <Container>
+        <Loading loadingStates={["SAVE_STORE_EDITS_LOADING"]} />
+
         <CurrentState />
 
         <h2 className="text-center">Edit {this.props.models.Store.store.name}</h2>
