@@ -1,57 +1,132 @@
-export const getAllProducts = (deployed, storeNumber) => {
+export const getAllProducts = (Contract, storeNumber) => {
   return async (dispatch) => {
-    const store = await deployed
-    .methods
-    .stores(storeNumber)
-    .call();
-
-    const productsLength = store.productNumber;
-
-    let products = [];
-
-    for (let i = 1; i <= productsLength; i++) {
-      let product = await deployed
+    try {
+      const store = await Contract
+      .deployed
       .methods
-      .products(storeNumber, i)
+      .stores(storeNumber)
       .call();
 
-      if (parseInt(product.state) === 0) {
-        products.push(product);
+      const productsLength = store.productNumber;
+
+      let products = [];
+
+      for (let i = 1; i <= productsLength; i++) {
+        const product = await Contract
+        .deployed
+        .methods
+        .products(storeNumber, i)
+        .call();
+
+        if (parseInt(product.state) === 0) {
+          products.push(product);
+        }
       }
+
+      dispatch({
+        type: "GET_PRODUCTS_SUCCESS",
+        payload: products
+      });
+
+      return products;
+    } catch(err) {
+      console.log(err);
     }
-
-    dispatch({
-      type: "GET_PRODUCTS_SUCCESS",
-      payload: products
-    });
   }
 }
 
-export const getOneProduct = (deployed, storeNumber, productNumber) => {
+export const getOneProduct = (Contract, storeNumber, productNumber) => {
   return async (dispatch) => {
-    let product = await deployed
-    .methods
-    .products(storeNumber, productNumber)
-    .call();
+    try {
+      let product = await Contract
+      .deployed
+      .methods
+      .products(storeNumber, productNumber)
+      .call();
 
-    dispatch({
-      type: "GET_ONE_PRODUCT_SUCCESS",
-      payload: product
-    });
+      dispatch({
+        type: "GET_ONE_PRODUCT_SUCCESS",
+        payload: product
+      });
 
-    return product;
+      return product;
+    } catch(err) {
+      console.log(err);
+    }
   }
 }
 
-export const saveProductEdits = (deployed, accounts, web3, storeNumber, productNumber, productObj) => {
+export const addProduct = (Contract, storeNumber, name, description, price, inventory) => {
   return async (dispatch) => {
-    await deployed
-    .methods
-    .saveProductEdits(storeNumber, productNumber, productObj.name, productObj.description, web3.utils.toWei(productObj.price, "ether"), productObj.inventory)
-    .send({ from: accounts[0] });
+    try {
+      await Contract
+      .deployed
+      .methods
+      .addProduct(storeNumber, name, description, Contract.web3.utils.toWei(price, "ether"), inventory)
+      .send({ from: Contract.accounts[0] });
+    } catch(err) {
+      console.log(err);
+    }
+  }
+}
 
-    return dispatch({
-      type: "SAVE_PRODUCT_EDITS_SUCCESS"
+export const saveProductEdits = (Contract, storeNumber, productNumber, productObj) => {
+  return async (dispatch) => {
+    dispatch({
+      type: "LOADING_START",
+      payload: "SAVE_PRODUCT_EDITS_LOADING"
     });
+
+    try {
+      await Contract
+      .deployed
+      .methods
+      .saveProductEdits(storeNumber, productNumber, productObj.name, productObj.description, Contract.web3.utils.toWei(productObj.price, "ether"), productObj.inventory)
+      .send({ from: Contract.accounts[0] });
+
+      dispatch({
+        type: "LOADING_STOP",
+        payload: "SAVE_PRODUCT_EDITS_LOADING"
+      });
+  
+      return dispatch({
+        type: "SAVE_PRODUCT_EDITS_SUCCESS"
+      });
+    } catch(err) {
+      console.log(err);
+
+      return dispatch({
+        type: "LOADING_STOP",
+        payload: "SAVE_PRODUCT_EDITS_LOADING"
+      });
+    }
+  }
+}
+
+export const buyProduct = (Contract, storeNumber, productNumber, productPrice) => {
+  return async (dispatch) => {
+    try {
+      await Contract
+      .deployed
+      .methods
+      .buyProduct(storeNumber, productNumber)
+      .send({ from: Contract.accounts[0], value: productPrice });
+    } catch(err) {
+      console.log(err);
+    }
+  }
+}
+
+export const deleteProduct = (Contract, storeNumber, productNumber) => {
+  return async (dispatch) => {
+    try {
+      await Contract
+      .deployed
+      .methods
+      .deleteProduct(storeNumber, productNumber)
+      .send({ from: Contract.accounts[0] });
+    } catch(err) {
+      console.log(err);
+    }
   }
 }

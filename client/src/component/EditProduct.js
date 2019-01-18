@@ -4,6 +4,7 @@ import { bindActionCreators } from "redux";
 import { Container } from "reactstrap";
 
 import CurrentState from "./CurrentState";
+import Loading from "./Loading";
 
 import { getOneProduct, saveProductEdits } from "../actions/productActions";
 
@@ -22,18 +23,17 @@ class EditProduct extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  componentDidMount() {
-    this
+  async componentDidMount() {
+    const product = await this
     .props
     .actions
-    .getOneProduct(this.props.Contract.deployed, this.props.match.params.storeNumber, this.props.match.params.productNumber)
-    .then((product) => {
-      this.setState({
-        name: product.name,
-        description: product.description,
-        price: this.props.Contract.web3.utils.fromWei(product.price, "ether"),
-        inventory: product.inventory
-      });
+    .getOneProduct(this.props.Contract, this.props.match.params.storeNumber, this.props.match.params.productNumber);
+
+    this.setState({
+      name: product.name,
+      description: product.description,
+      price: this.props.Contract.web3.utils.fromWei(product.price, "ether"),
+      inventory: product.inventory
     });
   }
 
@@ -43,21 +43,22 @@ class EditProduct extends Component {
     });
   }
 
-  handleSubmit(event) {
+  async handleSubmit(event) {
     event.preventDefault();
 
-    this
+    await this
     .props
     .actions
-    .saveProductEdits(this.props.Contract.deployed, this.props.Contract.accounts, this.props.Contract.web3, this.props.match.params.storeNumber, this.props.match.params.productNumber, this.state)
-    .then(() => {
-      window.location.href = `/stores/${this.props.match.params.storeNumber}/products`;
-    });
+    .saveProductEdits(this.props.Contract, this.props.match.params.storeNumber, this.props.match.params.productNumber, this.state);
+
+    window.location.href = `/stores/${this.props.match.params.storeNumber}/products`;
   }
 
   render() {
     return (
       <Container>
+        <Loading loadingStates={["SAVE_PRODUCT_EDITS_LOADING"]} />
+
         <CurrentState />
 
         <h2 className="text-center">Edit {this.props.models.Product.product.name}</h2>

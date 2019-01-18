@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Container, Row, Col, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 
-import { getAllProducts } from "../actions/productActions";
+import { getAllProducts, buyProduct, addProduct, deleteProduct } from "../actions/productActions";
 import { getOneStore } from "../actions/storeActions";
 
 import CurrentState from "./CurrentState";
@@ -29,7 +29,7 @@ class Products extends Component {
     this
     .props
     .actions
-    .getAllProducts(this.props.Contract.deployed, this.props.match.params.storeNumber);
+    .getAllProducts(this.props.Contract, this.props.match.params.storeNumber);
 
     this
     .props
@@ -56,11 +56,8 @@ class Products extends Component {
   async addProduct() {
     await this
     .props
-    .Contract
-    .deployed
-    .methods
-    .addProduct(this.props.match.params.storeNumber, this.state.newProductName, this.state.newProductDescription, this.props.Contract.web3.utils.toWei(this.state.newProductPrice, "ether"), this.state.newProductInventory)
-    .send({ from: this.props.Contract.accounts[0] });
+    .actions
+    .addProduct(this.props.Contract, this.props.match.params.storeNumber, this.state.newProductName, this.state.newProductDescription, this.state.newProductPrice, this.state.newProductInventory);
 
     this.setState({
       newProductName: "",
@@ -73,22 +70,19 @@ class Products extends Component {
     this
     .props
     .actions
-    .getAllProducts(this.props.Contract.deployed, this.props.match.params.storeNumber);
+    .getAllProducts(this.props.Contract, this.props.match.params.storeNumber);
   }
 
   async buyProduct(productNumber, productPrice) {
     await this
     .props
-    .Contract
-    .deployed
-    .methods
-    .buyProduct(this.props.match.params.storeNumber, productNumber)
-    .send({ from: this.props.Contract.accounts[0], value: productPrice });
+    .actions
+    .buyProduct(this.props.Contract, this.props.match.params.storeNumber, productNumber, productPrice);
 
     this
     .props
     .actions
-    .getAllProducts(this.props.Contract.deployed, this.props.match.params.storeNumber);
+    .getAllProducts(this.props.Contract, this.props.match.params.storeNumber);
   }
 
   async deleteProduct(productNumber) {
@@ -100,16 +94,13 @@ class Products extends Component {
 
     await this
     .props
-    .Contract
-    .deployed
-    .methods
-    .deleteProduct(this.props.match.params.storeNumber, productNumber)
-    .send({ from: this.props.Contract.accounts[0] });
+    .actions
+    .deleteProduct(this.props.Contract, this.props.match.params.storeNumber, productNumber);
 
     this
     .props
     .actions
-    .getAllProducts(this.props.Contract.deployed, this.props.match.params.storeNumber);
+    .getAllProducts(this.props.Contract, this.props.match.params.storeNumber);
   }
 
   render() {
@@ -216,7 +207,10 @@ const mapDispatchToProps = (dispatch) => {
   return {
     actions: {
       getAllProducts: bindActionCreators(getAllProducts, dispatch),
-      getOneStore: bindActionCreators(getOneStore, dispatch)
+      getOneStore: bindActionCreators(getOneStore, dispatch),
+      buyProduct: bindActionCreators(buyProduct, dispatch),
+      addProduct: bindActionCreators(addProduct, dispatch),
+      deleteProduct: bindActionCreators(deleteProduct, dispatch)
     }
   }
 }
