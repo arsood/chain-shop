@@ -72,13 +72,9 @@ export const saveStoreEdits = (Contract, storeNumber, storeObj) => {
       .saveStoreEdits(storeNumber, storeObj.name, storeObj.city)
       .send({ from: Contract.accounts[0] });
 
-      dispatch({
+      return dispatch({
         type: "LOADING_STOP",
         payload: "SAVE_STORE_EDITS_LOADING"
-      });
-
-      return dispatch({
-        type: "SAVE_STORE_EDITS_SUCCESS"
       });
     } catch(err) {
       console.log(err);
@@ -105,13 +101,9 @@ export const addStore = (Contract, name, city) => {
       .addStore(name, city)
       .send({ from: Contract.accounts[0] });
       
-      dispatch({
+      return dispatch({
         type: "LOADING_STOP",
         payload: "ADD_STORE_LOADING"
-      });
-
-      return dispatch({
-        type: "ADD_STORE_SUCCESS"
       });
     } catch(err) {
       console.log(err);
@@ -138,13 +130,9 @@ export const withdrawEarnings = (Contract, storeNumber) => {
       .withdrawEarnings(storeNumber)
       .send({ from: Contract.accounts[0] });
 
-      dispatch({
+      return dispatch({
         type: "LOADING_STOP",
         payload: "WITHDRAW_EARNINGS_LOADING"
-      });
-
-      return dispatch({
-        type: "WITHDRAW_EARNINGS_SUCCESS"
       });
     } catch(err) {
       console.log(err);
@@ -171,13 +159,9 @@ export const deleteStore = (Contract, storeNumber) => {
       .deleteStore(storeNumber)
       .send({ from: Contract.accounts[0] });
       
-      dispatch({
+      return dispatch({
         type: "LOADING_STOP",
         payload: "DELETE_STORE_LOADING"
-      });
-
-      return dispatch({
-        type: "DELETE_STORE_SUCCESS"
       });
     } catch(err) {
       console.log(err);

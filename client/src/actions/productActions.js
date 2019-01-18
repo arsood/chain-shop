@@ -99,13 +99,9 @@ export const saveProductEdits = (Contract, storeNumber, productNumber, productOb
       .saveProductEdits(storeNumber, productNumber, productObj.name, productObj.description, Contract.web3.utils.toWei(productObj.price, "ether"), productObj.inventory)
       .send({ from: Contract.accounts[0] });
 
-      dispatch({
+      return dispatch({
         type: "LOADING_STOP",
         payload: "SAVE_PRODUCT_EDITS_LOADING"
-      });
-  
-      return dispatch({
-        type: "SAVE_PRODUCT_EDITS_SUCCESS"
       });
     } catch(err) {
       console.log(err);
