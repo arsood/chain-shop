@@ -1,8 +1,12 @@
 import React, { Component } from "react";
 import { Container } from "reactstrap";
+import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
 import CurrentState from "./CurrentState";
+import Loading from "./Loading";
+
+import { getEmergencyStopState, getContractOwnerAddress, addAdmin, addOwner, toggleEmergencyStop } from "../actions/adminActions";
 
 class Admin extends Component {
   constructor() {
@@ -13,9 +17,7 @@ class Admin extends Component {
       newAdminName: "",
       getUserAddress: "",
       newOwnerAddress: "",
-      newOwnerName: "",
-      emergencyStop: false,
-      contractOwnerAddress: ""
+      newOwnerName: ""
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -27,16 +29,8 @@ class Admin extends Component {
   getEmergencyStopState() {
     this
     .props
-    .Contract
-    .deployed
-    .methods
-    .emergencyStop()
-    .call()
-    .then((es) => {
-      this.setState({
-        emergencyStop: es
-      });
-    });
+    .actions
+    .getEmergencyStopState(this.props.Contract);
   }
 
   componentDidMount() {
@@ -44,14 +38,8 @@ class Admin extends Component {
 
     this
     .props
-    .Contract
-    .deployed
-    .methods
-    .contractOwner()
-    .call()
-    .then((contractOwnerAddress) => {
-      this.setState({ contractOwnerAddress });
-    });
+    .actions
+    .getContractOwnerAddress(this.props.Contract);
   }
 
   handleChange(event) {
@@ -63,80 +51,90 @@ class Admin extends Component {
   async addAdmin() {
     await this
     .props
-    .Contract
-    .deployed
-    .methods
-    .addAdmin(this.state.newAdminAddress, this.state.newAdminName)
-    .send({ from: this.props.Contract.accounts[0] });
+    .actions
+    .addAdmin(this.props.Contract, this.state.newAdminAddress, this.state.newAdminName);
   }
 
   async addOwner() {
     await this
     .props
-    .Contract
-    .deployed
-    .methods
-    .addOwner(this.state.newOwnerAddress, this.state.newOwnerName)
-    .send({ from: this.props.Contract.accounts[0] });
+    .actions
+    .addOwner(this.props.Contract, this.state.newOwnerAddress, this.state.newOwnerName);
   }
 
   async toggleEmergencyStop() {
     await this
     .props
-    .Contract
-    .deployed
-    .methods
-    .toggleEmergencyStop()
-    .send({ from: this.props.Contract.accounts[0] });
+    .actions
+    .toggleEmergencyStop(this.props.Contract);
 
     this.getEmergencyStopState();
   }
 
   render() {
     return (
-      <Container>
-        <CurrentState />
+      <React.Fragment>
+        <Loading loadingStates={["ADD_ADMIN_LOADING", "ADD_OWNER_LOADING", "TOGGLE_EMERGENCY_STOP_LOADING"]} />
 
-        <h1 className="text-center mt-4">Add Admin</h1>
+        <Container>
+          <CurrentState />
 
-        <input onChange={this.handleChange} name="newAdminAddress" type="text" className="form-control mt-3" placeholder="Enter address of new admin" />
+          <h1 className="text-center mt-4">Add Admin</h1>
 
-        <input onChange={this.handleChange} name="newAdminName" type="text" className="form-control mt-3" placeholder="Enter name of new admin" />
+          <input onChange={this.handleChange} name="newAdminAddress" type="text" className="form-control mt-3" placeholder="Enter address of new admin" />
 
-        <div className="mt-3 text-center">
-          <button onClick={this.addAdmin} className="btn btn-primary">Add Admin</button>
-        </div>
+          <input onChange={this.handleChange} name="newAdminName" type="text" className="form-control mt-3" placeholder="Enter name of new admin" />
 
-        <h1 className="text-center mt-5">Add Store Owner</h1>
-
-        <input onChange={this.handleChange} name="newOwnerAddress" type="text" className="form-control mt-3" placeholder="Enter address of new owner" />
-
-        <input onChange={this.handleChange} name="newOwnerName" type="text" className="form-control mt-3" placeholder="Enter name of new store owner" />
-
-        <div className="mt-3 text-center">
-          <button onClick={this.addOwner} className="btn btn-primary">Add Store Owner</button>
-        </div>
-
-        { this.state.emergencyStop && this.props.Contract.accounts[0] === this.state.contractOwnerAddress ?
-          <div className="mt-4 alert alert-danger text-center">
-            Contract is in emergency stop mode
+          <div className="mt-3 text-center">
+            <button onClick={this.addAdmin} className="btn btn-primary">Add Admin</button>
           </div>
-        : null }
 
-        { this.props.Contract.accounts[0] === this.state.contractOwnerAddress ?
-          <div className="mt-4 text-center">
-            <button onClick={this.toggleEmergencyStop} className="btn btn-danger">Turn {this.state.emergencyStop ? "Off" : "On"} Emergency Stop Mode</button>
+          <h1 className="text-center mt-5">Add Store Owner</h1>
+
+          <input onChange={this.handleChange} name="newOwnerAddress" type="text" className="form-control mt-3" placeholder="Enter address of new owner" />
+
+          <input onChange={this.handleChange} name="newOwnerName" type="text" className="form-control mt-3" placeholder="Enter name of new store owner" />
+
+          <div className="mt-3 text-center">
+            <button onClick={this.addOwner} className="btn btn-primary">Add Store Owner</button>
           </div>
-        : null }
-      </Container>
+
+          { this.props.models.Admin.emergencyStop && this.props.Contract.accounts[0] === this.props.models.Admin.contractOwnerAddress ?
+            <div className="mt-4 alert alert-danger text-center">
+              Contract is in emergency stop mode
+            </div>
+          : null }
+
+          { this.props.Contract.accounts[0] === this.props.models.Admin.contractOwnerAddress ?
+            <div className="mt-4 text-center">
+              <button onClick={this.toggleEmergencyStop} className="btn btn-danger">Turn {this.props.models.Admin.emergencyStop ? "Off" : "On"} Emergency Stop Mode</button>
+            </div>
+          : null }
+        </Container>
+      </React.Fragment>
     );
   }
 }
 
 const mapStateToProps = (state) => {
   return {
-    Contract: state.Contract
+    Contract: state.Contract,
+    models: {
+      Admin: state.Admin
+    }
   }
 };
 
-export default connect(mapStateToProps, null)(Admin);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    actions: {
+      getEmergencyStopState: bindActionCreators(getEmergencyStopState, dispatch),
+      getContractOwnerAddress: bindActionCreators(getContractOwnerAddress, dispatch),
+      addAdmin: bindActionCreators(addAdmin, dispatch),
+      addOwner: bindActionCreators(addOwner, dispatch),
+      toggleEmergencyStop: bindActionCreators(toggleEmergencyStop, dispatch)
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Admin);

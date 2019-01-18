@@ -7,6 +7,7 @@ import { getAllProducts, buyProduct, addProduct, deleteProduct } from "../action
 import { getOneStore } from "../actions/storeActions";
 
 import CurrentState from "./CurrentState";
+import Loading from "./Loading";
 
 class Products extends Component {
   constructor() {
@@ -105,89 +106,93 @@ class Products extends Component {
 
   render() {
     return (
-      <Container>
-        <CurrentState />
+      <React.Fragment>
+        <Loading loadingStates={["ADD_PRODUCT_LOADING", "BUY_PRODUCT_LOADING", "DELETE_PRODUCT_LOADING"]} />
 
-        <h1 className="text-center mt-3">{this.props.models.Store.store.name}'s Products</h1>
+        <Container>
+          <CurrentState />
 
-        <div className="text-center">
-          <a href="/">Back to Stores</a>
-        </div>
+          <h1 className="text-center mt-3">{this.props.models.Store.store.name}'s Products</h1>
 
-        { this.props.models.User.userType === 2 ?
-          <div className="mt-3 text-center">
-            <a href="#" onClick={this.toggleAddProductModal}>Add New Product +</a>
+          <div className="text-center">
+            <a href="/">Back to Stores</a>
           </div>
-        : null }
 
-        { this.props.models.Product.products.length ?
-          <Row className="mt-3">
-            { this.props.models.Product.products.map((product, index) => {
-              if (product.state === "1") {
-                return false;
-              }
+          { this.props.models.User.userType === 2 ?
+            <div className="mt-3 text-center">
+              <a href="#" onClick={this.toggleAddProductModal}>Add New Product +</a>
+            </div>
+          : null }
 
-              return (
-                <Col sm="4" key={index} className="mt-3">
-                  <div className="card">
-                    <div className="card-body">
-                      <h2 className="text-center">{product.name}</h2>
+          { this.props.models.Product.products.length ?
+            <Row className="mt-3">
+              { this.props.models.Product.products.map((product, index) => {
+                if (product.state === "1") {
+                  return false;
+                }
 
-                      <div className="mt-2 text-center">
-                        {product.description}
-                      </div>
+                return (
+                  <Col sm="4" key={index} className="mt-3">
+                    <div className="card">
+                      <div className="card-body">
+                        <h2 className="text-center">{product.name}</h2>
 
-                      <div className="mt-2 text-center">
-                        {parseInt(this.props.Contract.web3.utils.fromWei(product.price, "ether"))} Ether
-                      </div>
-
-                      <div className="mt-2 text-center">
-                        Number Available: {product.inventory}
-                      </div>
-
-                      { this.props.models.User.userType === 2 ?
-                        <div className="mt-3 text-center">
-                          <a href={`/stores/${this.props.match.params.storeNumber}/products/${product.productNumber}/edit`}>Edit Product</a>
+                        <div className="mt-2 text-center">
+                          {product.description}
                         </div>
-                      : null }
 
-                      <Row className="mt-4">
+                        <div className="mt-2 text-center">
+                          {parseInt(this.props.Contract.web3.utils.fromWei(product.price, "ether"))} Ether
+                        </div>
+
+                        <div className="mt-2 text-center">
+                          Number Available: {product.inventory}
+                        </div>
+
                         { this.props.models.User.userType === 2 ?
-                          <Col sm="12">
-                            <button onClick={this.deleteProduct.bind(this, product.productNumber)} className="btn btn-danger btn-block">Delete</button>
-                          </Col>
-                        :
-                          <Col sm="12">
-                            <button onClick={this.buyProduct.bind(this, product.productNumber, product.price)} className="btn btn-success btn-block" disabled={product.inventory === "0" ? "disabled" : ""}>Buy Now</button>
-                          </Col>
-                        }
-                      </Row>
+                          <div className="mt-3 text-center">
+                            <a href={`/stores/${this.props.match.params.storeNumber}/products/${product.productNumber}/edit`}>Edit Product</a>
+                          </div>
+                        : null }
+
+                        <Row className="mt-4">
+                          { this.props.models.User.userType === 2 ?
+                            <Col sm="12">
+                              <button onClick={this.deleteProduct.bind(this, product.productNumber)} className="btn btn-danger btn-block">Delete</button>
+                            </Col>
+                          :
+                            <Col sm="12">
+                              <button onClick={this.buyProduct.bind(this, product.productNumber, product.price)} className="btn btn-success btn-block" disabled={product.inventory === "0" ? "disabled" : ""}>Buy Now</button>
+                            </Col>
+                          }
+                        </Row>
+                      </div>
                     </div>
-                  </div>
-                </Col>
-              );
-            }) }
-          </Row>
-        : null }
+                  </Col>
+                );
+              }) }
+            </Row>
+          : null }
 
-        <Modal isOpen={this.state.showAddProductModal} toggle={this.toggleAddProductModal}>
-          <ModalHeader toggle={this.toggleAddProductModal}>Add Product</ModalHeader>
-        
-          <ModalBody>
-            <input onChange={this.handleChange} name="newProductName" type="text" className="form-control mt-3" placeholder="Enter name of new product" />
+          <Modal isOpen={this.state.showAddProductModal} toggle={this.toggleAddProductModal}>
+            <ModalHeader toggle={this.toggleAddProductModal}>Add Product</ModalHeader>
+          
+            <ModalBody>
+              <input onChange={this.handleChange} name="newProductName" type="text" className="form-control mt-3" placeholder="Enter name of new product" />
 
-            <input onChange={this.handleChange} name="newProductDescription" type="text" className="form-control mt-3" placeholder="Enter description of new product" />
+              <input onChange={this.handleChange} name="newProductDescription" type="text" className="form-control mt-3" placeholder="Enter description of new product" />
 
-            <input onChange={this.handleChange} name="newProductPrice" type="number" className="form-control mt-3" placeholder="Enter price of new product in Ether" />
+              <input onChange={this.handleChange} name="newProductPrice" type="number" className="form-control mt-3" placeholder="Enter price of new product in Ether" />
 
-            <input onChange={this.handleChange} name="newProductInventory" type="number" className="form-control mt-3" placeholder="Enter inventory of new product" />
-          </ModalBody>
+              <input onChange={this.handleChange} name="newProductInventory" type="number" className="form-control mt-3" placeholder="Enter inventory of new product" />
+            </ModalBody>
 
-          <ModalFooter>
-            <button onClick={this.addProduct} className="btn btn-primary">Add Product</button>
-          </ModalFooter>
-        </Modal>
-      </Container>
+            <ModalFooter>
+              <button onClick={this.addProduct} className="btn btn-primary">Add Product</button>
+            </ModalFooter>
+          </Modal>
+        </Container>
+      </React.Fragment>
     );
   }
 }
