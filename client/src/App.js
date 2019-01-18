@@ -12,6 +12,7 @@ import Products from "./component/Products";
 import EditStore from "./component/EditStore";
 import EditProduct from "./component/EditProduct";
 
+import "./vendor/css/bootstrap.min.css";
 import "./App.css";
 
 const history = createBrowserHistory();
