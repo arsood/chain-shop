@@ -3,9 +3,10 @@ import { Container, Row, Col, Modal, ModalHeader, ModalBody, ModalFooter } from 
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import { getAllStores } from "../actions/storeActions";
+import { getAllStores, addStore, withdrawEarnings, deleteStore } from "../actions/storeActions";
 
 import CurrentState from "./CurrentState";
+import Loading from "./Loading";
 
 class Stores extends Component {
   constructor() {
@@ -35,14 +36,11 @@ class Stores extends Component {
     });
   }
 
-  async addStore() {
+  addStore() {
     this
     .props
-    .Contract
-    .deployed
-    .methods
-    .addStore(this.state.newStoreName, this.state.newStoreCity)
-    .send({ from: this.props.Contract.accounts[0] })
+    .actions
+    .addStore(this.props.Contract.deployed, this.props.Contract.accounts, this.state.newStoreName, this.state.newStoreCity)
     .then(() => {
       this.setState({
         newStoreName: "",
@@ -54,9 +52,6 @@ class Stores extends Component {
       .props
       .actions
       .getAllStores(this.props.Contract.deployed);
-    })
-    .catch((err) => {
-      console.log(err);
     });
   }
 
@@ -81,18 +76,16 @@ class Stores extends Component {
       return false;
     }
 
-    await this
-    .props
-    .Contract
-    .deployed
-    .methods
-    .withdrawEarnings(storeNumber)
-    .send({ from: this.props.Contract.accounts[0] });
-
     this
     .props
     .actions
-    .getAllStores(this.props.Contract.deployed, this.props.models.User.userType === 2, this.props.Contract.accounts[0]);
+    .withdrawEarnings(this.props.Contract, storeNumber)
+    .then(() => {
+      this
+      .props
+      .actions
+      .getAllStores(this.props.Contract.deployed, this.props.models.User.userType === 2, this.props.Contract.accounts[0]);
+    });
   }
 
   async deleteStore(storeNumber) {
@@ -102,23 +95,23 @@ class Stores extends Component {
       return false;
     }
     
-    await this
-    .props
-    .Contract
-    .deployed
-    .methods
-    .deleteStore(storeNumber)
-    .send({ from: this.props.Contract.accounts[0] });
-
     this
     .props
     .actions
-    .getAllStores(this.props.Contract.deployed, this.props.models.User.userType === 2, this.props.Contract.accounts[0]);
+    .deleteStore(this.props.Contract, storeNumber)
+    .then(() => {
+      this
+      .props
+      .actions
+      .getAllStores(this.props.Contract.deployed, this.props.models.User.userType === 2, this.props.Contract.accounts[0]);
+    });
   }
   
   render() {
     return (
       <React.Fragment>
+        <Loading loadingStates={["ADD_STORE_LOADING", "WITHDRAW_EARNINGS_LOADING", "DELETE_STORE_LOADING"]} />
+
         <Container>
           <CurrentState />
 
@@ -219,7 +212,10 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     actions: {
-      getAllStores: bindActionCreators(getAllStores, dispatch)
+      getAllStores: bindActionCreators(getAllStores, dispatch),
+      addStore: bindActionCreators(addStore, dispatch),
+      withdrawEarnings: bindActionCreators(withdrawEarnings, dispatch),
+      deleteStore: bindActionCreators(deleteStore, dispatch)
     }
   }
 }

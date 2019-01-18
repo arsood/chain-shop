@@ -59,3 +59,101 @@ export const saveStoreEdits = (deployed, accounts, storeNumber, storeObj) => {
     });
   }
 }
+
+export const addStore = (deployed, accounts, name, city) => {
+  return (dispatch) => {
+    dispatch({
+      type: "LOADING_START",
+      payload: "ADD_STORE_LOADING"
+    });
+
+    return deployed
+    .methods
+    .addStore(name, city)
+    .send({ from: accounts[0] })
+    .then(() => {
+      dispatch({
+        type: "LOADING_STOP",
+        payload: "ADD_STORE_LOADING"
+      });
+
+      return dispatch({
+        type: "ADD_STORE_SUCCESS"
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+
+      return dispatch({
+        type: "LOADING_STOP",
+        payload: "ADD_STORE_LOADING"
+      });
+    });
+  }
+}
+
+export const withdrawEarnings = (Contract, storeNumber) => {
+  return (dispatch) => {
+    dispatch({
+      type: "LOADING_START",
+      payload: "WITHDRAW_EARNINGS_LOADING"
+    });
+
+    return Contract
+    .deployed
+    .methods
+    .withdrawEarnings(storeNumber)
+    .send({ from: Contract.accounts[0] })
+    .then(() => {
+      dispatch({
+        type: "LOADING_STOP",
+        payload: "WITHDRAW_EARNINGS_LOADING"
+      });
+
+      return dispatch({
+        type: "WITHDRAW_EARNINGS_SUCCESS"
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+
+      return dispatch({
+        type: "LOADING_STOP",
+        payload: "WITHDRAW_EARNINGS_LOADING"
+      });
+    });
+  }
+}
+
+export const deleteStore = (Contract, storeNumber) => {
+  return (dispatch) => {
+    dispatch({
+      type: "LOADING_START",
+      payload: "DELETE_STORE_LOADING"
+    });
+
+    return Contract
+    .deployed
+    .methods
+    .deleteStore(storeNumber)
+    .send({ from: Contract.accounts[0] })
+    .then(() => {
+      dispatch({
+        type: "LOADING_STOP",
+        payload: "DELETE_STORE_LOADING"
+      });
+
+      return dispatch({
+        type: "DELETE_STORE_SUCCESS"
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+
+      return dispatch({
+        type: "LOADING_STOP",
+        payload: "DELETE_STORE_LOADING"
+      });
+    });
+  }
+}
