@@ -8,8 +8,9 @@ The purpose of this application is to practice using the Ethereum set of tools t
 
 1. Start Ganache on port 8545.
 2. Migrate contracts: `truffle migrate --reset --all`
-3. `cd client && npm install`
-4. `npm start`
+3. Install main dependencies: `npm install`
+4. Install client dependencies: `cd client && npm install`
+5. `npm start`
 
 ## Testing Flow
 
