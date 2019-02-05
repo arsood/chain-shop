@@ -17,5 +17,10 @@ module.exports = {
       network_id: 3,
       gas: 4000000
     }
+  },
+  compilers: {
+    solc: {
+      version: "^0.5.0"
+    }
   }
 };
